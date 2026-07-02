@@ -1,0 +1,4 @@
+.pricing__grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+@media (min-width: 760px) { .pricing__grid { grid-template-columns: 1fr 1fr; align-items: stretch; } }
+.pricing__note { text-align: center; margin-top: 2rem; color: var(--muted-foreground); display: flex; flex-direction: column; gap: .4rem; }
+.pricing__note strong { color: var(--foreground); }

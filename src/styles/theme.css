@@ -1,0 +1,82 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+/* =========================================================
+   TOKENS GLOBAIS — SlotMe (chumbo + violeta vibrante)
+   ========================================================= */
+:root {
+  --font-heading: 'Sora', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --background: #0e1013;      /* chumbo quase preto */
+  --surface: #171a1f;         /* cartões / superfícies */
+  --surface-2: #1e2229;
+  --foreground: #f5f6f8;      /* texto claro */
+  --muted-foreground: #a8adb8;
+  --primary: #6c5ce7;         /* violeta / índigo vibrante */
+  --primary-600: #7d6ef2;
+  --primary-700: #5a49d1;
+  --primary-foreground: #ffffff;
+  --accent: #f5b942;          /* âmbar, uso pontual */
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(108, 92, 231, 0.4);
+
+  --radius: 0.9rem;
+  --radius-sm: 0.55rem;
+  --maxw: 1180px;
+  --shadow-primary: 0 20px 45px -18px rgba(108, 92, 231, 0.45);
+}
+
+/* Mapeia tokens para utilitários do Tailwind (bg-primary, text-muted, etc.) */
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --font-heading: var(--font-heading);
+  --font-sans: var(--font-sans);
+}
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-heading); margin: 0; line-height: 1.2; font-weight: 700; }
+  a { color: inherit; text-decoration: none; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  img, svg { display: block; max-width: 100%; }
+  :focus-visible { outline: 2px solid var(--primary-600); outline-offset: 3px; border-radius: 4px; }
+  ::selection { background: var(--primary); color: #fff; }
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #08090b; }
+::-webkit-scrollbar-thumb { background: var(--primary-700); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* =========================================================
+   PRIMITIVOS DE LAYOUT REUTILIZÁVEIS
+   ========================================================= */
+.container-x {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+.section { padding-block: clamp(3.5rem, 7vw, 6rem); position: relative; }
+.section--surface { background-color: var(--surface); border-block: 1px solid var(--border); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}

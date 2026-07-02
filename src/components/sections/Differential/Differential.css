@@ -1,0 +1,28 @@
+.differential {
+  border-radius: 1.4rem; padding: clamp(2rem, 5vw, 3.5rem);
+  background: linear-gradient(160deg, rgba(108, 92, 231, .16), rgba(108, 92, 231, .03));
+  border: 1px solid var(--border-strong);
+  display: grid; gap: 2.25rem; align-items: center;
+}
+@media (min-width: 900px) { .differential { grid-template-columns: 1.1fr .9fr; } }
+
+.differential__eyebrow {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--primary-600); background: rgba(108, 92, 231, .12);
+  border: 1px solid var(--border-strong); padding: .4rem .85rem; border-radius: 999px;
+  margin-bottom: 1.1rem;
+}
+.differential__title { font-size: clamp(1.7rem, 1.4rem + 1.4vw, 2.3rem); margin-bottom: .85rem; }
+.differential__subtitle { color: var(--muted-foreground); margin-bottom: 1.5rem; max-width: 52ch; }
+.differential__bullets { display: flex; flex-direction: column; gap: .9rem; }
+.differential__bullets li { display: flex; align-items: flex-start; gap: .7rem; font-weight: 600; }
+.differential__bullets svg { color: var(--primary-600); margin-top: .15rem; flex-shrink: 0; }
+
+.differential__card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; }
+.differential__row { display: flex; align-items: center; gap: .75rem; padding-block: .65rem; border-bottom: 1px solid var(--border); }
+.differential__row:last-child { border-bottom: none; }
+.differential__row svg.is-ok { color: var(--accent); flex-shrink: 0; }
+.differential__row svg.is-not { color: var(--muted-foreground); flex-shrink: 0; }
+.differential__row strong { display: block; font-size: .92rem; }
+.differential__row span { color: var(--muted-foreground); font-size: .82rem; }

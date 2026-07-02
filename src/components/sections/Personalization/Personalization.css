@@ -1,0 +1,8 @@
+.personalization__grid {
+  display: grid; gap: 2.5rem; grid-template-columns: 1fr; max-width: 40rem; margin-inline: auto;
+}
+@media (min-width: 640px) { .personalization__grid { grid-template-columns: 1fr 1fr; max-width: none; } }
+
+.personalization__item { display: flex; flex-direction: column; align-items: center; gap: .35rem; text-align: center; }
+.personalization__name { font-family: var(--font-heading); font-weight: 700; margin-top: 1rem; }
+.personalization__vibe { color: var(--muted-foreground); font-size: .85rem; }

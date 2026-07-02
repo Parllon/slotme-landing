@@ -1,0 +1,1 @@
+.faq__list { display: flex; flex-direction: column; gap: .75rem; max-width: 46rem; margin-inline: auto; }

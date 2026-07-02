@@ -1,0 +1,20 @@
+.floating-wpp {
+  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 60;
+  width: 58px; height: 58px; border-radius: 50%;
+  background: #25d366; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 14px 30px -10px rgba(0, 0, 0, .55);
+  transition: transform .2s ease;
+}
+.floating-wpp:hover { transform: translateY(-3px) scale(1.04); }
+.floating-wpp__icon { width: 28px; height: 28px; }
+.floating-wpp__tooltip {
+  position: absolute; right: calc(100% + .75rem); top: 50%; transform: translateY(-50%);
+  background: var(--surface-2); color: var(--foreground); border: 1px solid var(--border);
+  padding: .5rem .85rem; border-radius: var(--radius-sm); font-size: .82rem; font-weight: 600;
+  white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s ease;
+}
+.floating-wpp:hover .floating-wpp__tooltip { opacity: 1; }
+@media (max-width: 640px) {
+  .floating-wpp__tooltip { display: none; }
+}

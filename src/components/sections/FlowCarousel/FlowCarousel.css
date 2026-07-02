@@ -1,0 +1,29 @@
+.flow-carousel { position: relative; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+.flow-carousel__stage { position: relative; width: 100%; display: flex; justify-content: center; }
+.flow-carousel__stage > div { cursor: grab; }
+.flow-carousel__stage > div:active { cursor: grabbing; }
+
+.flow-carousel__nav {
+  position: absolute; top: 40%; transform: translateY(-50%); z-index: 3;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--surface-2); border: 1px solid var(--border); color: var(--foreground);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.flow-carousel__nav:hover { border-color: var(--primary-600); color: var(--primary-600); }
+.flow-carousel__nav--prev { left: .25rem; }
+.flow-carousel__nav--next { right: .25rem; }
+
+.flow-carousel__caption { text-align: center; min-height: 3.4rem; }
+.flow-carousel__step {
+  display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--primary-600); margin-bottom: .35rem;
+}
+.flow-carousel__text { color: var(--muted-foreground); font-size: .92rem; margin: 0; max-width: 26rem; margin-inline: auto; }
+
+.flow-carousel__dots { display: flex; gap: .5rem; }
+.flow-carousel__dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--border); border: none; cursor: pointer;
+  transition: background-color .2s ease, transform .2s ease; padding: 0;
+}
+.flow-carousel__dot.is-active { background: var(--primary); transform: scale(1.3); }
