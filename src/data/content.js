@@ -11,6 +11,8 @@ import flow4 from "../assets/screenshots/navalha-4-dados.jpg";
 import flow5 from "../assets/screenshots/navalha-5-revisar.jpg";
 import temaNavalha from "../assets/screenshots/navalha-1-profissional.jpg";
 import temaStudio from "../assets/screenshots/studio-1-profissional.jpg";
+import inicioStudioBeauty from "../assets/screenshots/studio-beauty-inicio.jpg";
+import inicioByaMarcondes from "../assets/screenshots/bya-marcondes-inicio.jpg";
 
 /* Marca / config global */
 export const brand = {
@@ -58,6 +60,12 @@ export const flowSteps = [
 export const themeComparison = [
   { image: temaNavalha, name: "Navalha de Ouro", vibe: "Masculino, preto e dourado" },
   { image: temaStudio, name: "Studio Beleza", vibe: "Delicado, rosa e branco" },
+];
+
+/* Clientes reais com página de agendamento SlotMe já no ar. */
+export const clients = [
+  { name: "Studio Beauty", service: "Sobrancelhas e cílios", url: "https://studiobeauty.myvisual.com.br/", image: inicioStudioBeauty },
+  { name: "Bya Marcondes", service: "Designer de unhas", url: "https://byamarcondes.myvisual.com.br/", image: inicioByaMarcondes },
 ];
 
 /* Barra de dores */

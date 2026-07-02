@@ -6,6 +6,7 @@ import { Differential } from "./components/sections/Differential/Differential";
 import { Services } from "./components/sections/Services/Services";
 import { Pricing } from "./components/sections/Pricing/Pricing";
 import { Personalization } from "./components/sections/Personalization/Personalization";
+import { Clients } from "./components/sections/Clients/Clients";
 import { Faq } from "./components/sections/Faq/Faq";
 import { Contact } from "./components/sections/Contact/Contact";
 import { Footer } from "./components/sections/Footer/Footer";
@@ -23,6 +24,7 @@ export default function App() {
         <Services />
         <Pricing />
         <Personalization />
+        <Clients />
         <Faq />
         <Contact />
       </main>
