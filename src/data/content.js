@@ -1,14 +1,14 @@
 import {
   Clock, AlertTriangle, LayoutGrid, HelpCircle,
   Layout, Calendar, Users, Bell, MessageCircle, Globe,
-  Check, X, Star,
+  Star,
 } from "lucide-react";
 
-import flow1 from "../assets/screenshots/navalha-1-profissional.jpg";
-import flow2 from "../assets/screenshots/navalha-2-servico.jpg";
-import flow3 from "../assets/screenshots/navalha-3-horario.jpg";
-import flow4 from "../assets/screenshots/navalha-4-dados.jpg";
-import flow5 from "../assets/screenshots/navalha-5-revisar.jpg";
+import flow1 from "../assets/screenshots/studio-1-profissional.jpg";
+import flow2 from "../assets/screenshots/studio-2-servico.jpg";
+import flow3 from "../assets/screenshots/studio-3-horario.jpg";
+import flow4 from "../assets/screenshots/studio-4-dados.jpg";
+import flow5 from "../assets/screenshots/studio-5-revisar.jpg";
 import temaNavalha from "../assets/screenshots/navalha-1-profissional.jpg";
 import temaStudio from "../assets/screenshots/studio-1-profissional.jpg";
 import inicioStudioBeauty from "../assets/screenshots/studio-beauty-inicio.jpg";
@@ -18,11 +18,11 @@ import inicioByaMarcondes from "../assets/screenshots/bya-marcondes-inicio.jpg";
 export const brand = {
   name: "SlotMe",
   tagline: "Agendamento + Google Calendar",
-  domain: "agendamentos.app.br",
+  domain: "slotme.agendamentos.app.br",
 };
 
 export const whatsapp = {
-  phone: "55XXXXXXXXXXX",
+  phone: "5522981290841",
   message: "Oi! Quero saber mais sobre o SlotMe.",
 };
 
@@ -46,7 +46,7 @@ export const hero = {
 };
 
 /* Carrossel do fluxo de agendamento no Hero — telas reais de um cliente SlotMe
-   (Navalha de Ouro), capturadas em formato mobile direto da página em produção. */
+   (Studio Beleza), capturadas em formato mobile direto da página em produção. */
 export const flowSteps = [
   { image: flow1, step: "1. Profissional", caption: "O cliente escolhe quem vai atender." },
   { image: flow2, step: "2. Serviço", caption: "Serviços e preços, sempre atualizados." },
@@ -119,11 +119,16 @@ export const differential = {
     "Sem tela nova pra decorar, sem treinamento",
     "Funciona no Google Calendar do seu celular ou computador",
   ],
-  card: [
-    { icon: Calendar, ok: true, title: "Google Calendar", text: "Sua agenda de sempre, sem instalar nada" },
-    { icon: X, ok: false, title: "Painel administrativo próprio", text: "Não existe — e é assim de propósito" },
-    { icon: Check, ok: true, title: "Curva de aprendizado", text: "Praticamente zero" },
-  ],
+  /* Painel ilustrativo: agenda do dia se preenchendo sozinha (eventos fictícios) */
+  panel: {
+    title: "Google Calendar",
+    events: [
+      { title: "Corte + barba — João", sub: "Hoje · 14:00", tone: "dark" },
+      { title: "Escova — Mariana", sub: "Hoje · 15:30", tone: "silver" },
+      { title: "Sobrancelha — Ana", sub: "Hoje · 16:00", tone: "dark" },
+    ],
+    note: "Agendamentos entram sozinhos, em tempo real",
+  },
 };
 
 /* Recursos */
@@ -207,7 +212,11 @@ export const faqData = [
 export const ctaFinal = {
   title: "Pronto pra parar de agendar por mensagem?",
   subtitle: "Me chama e eu te mostro como fica a sua página de agendamento — sem compromisso.",
-  formNote: "Ao enviar, você será direcionado ao nosso WhatsApp com os dados preenchidos.",
+  // Chave gratuita do https://web3forms.com — o formulário chega por e-mail.
+  web3formsKey: "2439a2ec-3c3b-4999-b53d-3dfe18d5e67b",
+  formNote: "Sem spam: seus dados chegam direto pra mim e eu retorno em até 1 dia útil.",
+  formSuccess: "Recebi seu contato! Te chamo em breve. 👍",
+  formError: "Não consegui enviar agora. Tente de novo ou me chame direto no WhatsApp.",
 };
 
 /* Rodapé */

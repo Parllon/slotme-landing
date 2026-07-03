@@ -1,28 +1,58 @@
-.differential {
-  border-radius: 1.4rem; padding: clamp(2rem, 5vw, 3.5rem);
-  background: linear-gradient(160deg, rgba(108, 92, 231, .16), rgba(108, 92, 231, .03));
-  border: 1px solid var(--border-strong);
-  display: grid; gap: 2.25rem; align-items: center;
-}
-@media (min-width: 900px) { .differential { grid-template-columns: 1.1fr .9fr; } }
+.differential { display: grid; gap: 2.75rem; align-items: center; }
+@media (min-width: 900px) { .differential { grid-template-columns: 1fr 1fr; gap: 4rem; } }
 
 .differential__eyebrow {
   display: inline-flex; align-items: center; gap: .5rem;
-  font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
-  color: var(--primary-600); background: rgba(108, 92, 231, .12);
-  border: 1px solid var(--border-strong); padding: .4rem .85rem; border-radius: 999px;
+  font-size: .8rem; font-weight: 600; letter-spacing: .02em;
+  color: var(--primary-600); background: rgba(18, 19, 23, .06);
+  padding: .4rem .9rem; border-radius: 999px;
   margin-bottom: 1.1rem;
 }
-.differential__title { font-size: clamp(1.7rem, 1.4rem + 1.4vw, 2.3rem); margin-bottom: .85rem; }
-.differential__subtitle { color: var(--muted-foreground); margin-bottom: 1.5rem; max-width: 52ch; }
-.differential__bullets { display: flex; flex-direction: column; gap: .9rem; }
-.differential__bullets li { display: flex; align-items: flex-start; gap: .7rem; font-weight: 600; }
-.differential__bullets svg { color: var(--primary-600); margin-top: .15rem; flex-shrink: 0; }
+.differential__title { font-size: clamp(1.7rem, 1.4rem + 1.4vw, 2.3rem); margin-bottom: .85rem; letter-spacing: -.015em; }
+.differential__subtitle { color: var(--muted-foreground); margin-bottom: 1.75rem; max-width: 52ch; line-height: 1.7; }
+.differential__bullets { display: flex; flex-direction: column; gap: .8rem; }
+.differential__bullets li { display: flex; align-items: center; gap: .75rem; font-weight: 500; font-size: .95rem; }
+.differential__check {
+  width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(18, 19, 23, .08); color: var(--foreground);
+  display: flex; align-items: center; justify-content: center;
+}
 
-.differential__card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; }
-.differential__row { display: flex; align-items: center; gap: .75rem; padding-block: .65rem; border-bottom: 1px solid var(--border); }
-.differential__row:last-child { border-bottom: none; }
-.differential__row svg.is-ok { color: var(--accent); flex-shrink: 0; }
-.differential__row svg.is-not { color: var(--muted-foreground); flex-shrink: 0; }
-.differential__row strong { display: block; font-size: .92rem; }
-.differential__row span { color: var(--muted-foreground); font-size: .82rem; }
+/* Painel mock do Google Calendar */
+.differential__visual { display: flex; justify-content: center; }
+.differential__panel {
+  background: var(--background); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.5rem;
+  box-shadow: 0 16px 60px rgba(18, 19, 23, .10);
+  width: 100%; max-width: 380px;
+}
+.differential__panel-header {
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .9rem; font-weight: 600; color: var(--foreground);
+  margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+}
+.differential__panel-icon { color: var(--foreground); }
+.differential__panel-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--foreground); margin-left: auto;
+  animation: differential-pulse 2s ease-in-out infinite;
+}
+@keyframes differential-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(.8); }
+}
+.differential__event {
+  display: flex; gap: .75rem; align-items: stretch;
+  padding: .75rem; border-radius: .75rem; background: var(--surface); margin-bottom: .6rem;
+}
+.differential__event-bar { width: 3px; border-radius: 99px; min-height: 40px; flex-shrink: 0; }
+.differential__event-bar--dark { background: var(--foreground); }
+.differential__event-bar--silver { background: var(--accent); }
+.differential__event-title { font-size: .82rem; font-weight: 600; color: var(--foreground); margin-bottom: .15rem; }
+.differential__event-sub { font-size: .72rem; color: var(--muted-foreground); }
+.differential__panel-note {
+  display: flex; align-items: center; gap: .4rem; margin: .75rem 0 0;
+  font-size: .72rem; font-weight: 500; color: var(--muted-foreground);
+}
+.differential__panel-note-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--foreground); flex-shrink: 0;
+}

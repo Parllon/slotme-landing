@@ -1,2 +1,4 @@
-.how-it-works__grid { display: grid; gap: 2rem; grid-template-columns: 1fr; }
-@media (min-width: 860px) { .how-it-works__grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; } }
+.how-it-works__steps {
+  max-width: 800px; margin-inline: auto;
+  display: flex; flex-direction: column;
+}

@@ -80,30 +80,18 @@ async function capturarFluxoCompleto(page, prefixo) {
   await shot(page, `${prefixo}-5-revisar`);
 }
 
-async function capturarApenasHero(page, prefixo) {
-  await page.waitForSelector('#lista-profissionais button', { timeout: 15000 });
-  await shot(page, `${prefixo}-1-profissional`);
-}
-
 const browser = await puppeteer.launch({
   executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
 });
 
 try {
-  console.log('Navalha de Ouro — fluxo completo...');
+  console.log('Studio Beleza — fluxo completo...');
   const page1 = await browser.newPage();
   await page1.setViewport(VIEWPORT);
-  await page1.goto('https://navalha.agendamentos.app.br', { waitUntil: 'networkidle0' });
-  await capturarFluxoCompleto(page1, 'navalha');
+  await page1.goto('https://studiobeleza.agendamentos.app.br', { waitUntil: 'networkidle0' });
+  await capturarFluxoCompleto(page1, 'studio');
   await page1.close();
-
-  console.log('Studio Beleza — tela inicial (comparação de tema)...');
-  const page2 = await browser.newPage();
-  await page2.setViewport(VIEWPORT);
-  await page2.goto('https://studiobeleza.agendamentos.app.br', { waitUntil: 'networkidle0' });
-  await capturarApenasHero(page2, 'studio');
-  await page2.close();
 } finally {
   await browser.close();
 }

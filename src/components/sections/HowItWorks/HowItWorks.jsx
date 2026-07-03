@@ -13,8 +13,16 @@ export function HowItWorks() {
           highlight="ao lembrete"
           subtitle="Simples pra você e simples pro seu cliente — sem ninguém precisar aprender nada."
         />
-        <div className="how-it-works__grid">
-          {howItWorks.map((step, i) => <StepCard key={step.title} {...step} number={i + 1} delay={i * 0.1} />)}
+        <div className="how-it-works__steps">
+          {howItWorks.map((step, i) => (
+            <StepCard
+              key={step.title}
+              {...step}
+              number={i + 1}
+              isLast={i === howItWorks.length - 1}
+              delay={i * 0.1}
+            />
+          ))}
         </div>
       </div>
     </section>

@@ -11,7 +11,7 @@ export function Hero() {
 
   return (
     <section id="hero" className="hero" aria-labelledby="hero-title">
-      <div className="hero__glow" aria-hidden="true" />
+      <div className="hero__bg" aria-hidden="true" />
       <div className="container-x hero__grid">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
           <span className="hero__eyebrow">
@@ -35,7 +35,7 @@ export function Hero() {
           </p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 24, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }}>
+        <motion.div className="hero__carousel-col" initial={{ opacity: 0, y: 24, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }}>
           <FlowCarousel />
         </motion.div>
       </div>

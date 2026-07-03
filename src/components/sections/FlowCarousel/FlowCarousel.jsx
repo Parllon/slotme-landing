@@ -61,27 +61,28 @@ export function FlowCarousel() {
         </AnimatePresence>
       </div>
 
-      <button className="flow-carousel__nav flow-carousel__nav--prev" aria-label="Passo anterior" onClick={() => paginate(-1)}>
-        <ChevronLeft size={22} />
-      </button>
-      <button className="flow-carousel__nav flow-carousel__nav--next" aria-label="Próximo passo" onClick={() => paginate(1)}>
-        <ChevronRight size={22} />
-      </button>
+      <div className="flow-carousel__controls">
+        <button className="flow-carousel__nav" aria-label="Passo anterior" onClick={() => paginate(-1)}>
+          <ChevronLeft size={18} />
+        </button>
+        <div className="flow-carousel__dots">
+          {flowSteps.map((s, i) => (
+            <button
+              key={s.step}
+              className={`flow-carousel__dot ${i === index ? "is-active" : ""}`}
+              aria-label={`Ir para o passo ${i + 1}`}
+              onClick={() => setState([i, i > index ? 1 : -1])}
+            />
+          ))}
+        </div>
+        <button className="flow-carousel__nav" aria-label="Próximo passo" onClick={() => paginate(1)}>
+          <ChevronRight size={18} />
+        </button>
+      </div>
 
       <div className="flow-carousel__caption">
         <span className="flow-carousel__step">{current.step}</span>
         <p className="flow-carousel__text">{current.caption}</p>
-      </div>
-
-      <div className="flow-carousel__dots">
-        {flowSteps.map((s, i) => (
-          <button
-            key={s.step}
-            className={`flow-carousel__dot ${i === index ? "is-active" : ""}`}
-            aria-label={`Ir para o passo ${i + 1}`}
-            onClick={() => setState([i, i > index ? 1 : -1])}
-          />
-        ))}
       </div>
     </div>
   );

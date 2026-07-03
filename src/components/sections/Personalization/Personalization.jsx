@@ -6,7 +6,7 @@ import "./Personalization.css";
 
 export function Personalization() {
   return (
-    <section className="section">
+    <section className="section section--surface">
       <div className="container-x">
         <SectionHeader
           eyebrow="Landing page personalizada"

@@ -1,1 +1,5 @@
-.faq__list { display: flex; flex-direction: column; gap: .75rem; max-width: 46rem; margin-inline: auto; }
+.faq__list {
+  display: flex; flex-direction: column; max-width: 48rem; margin-inline: auto;
+  background: var(--background); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+}

@@ -1,13 +1,13 @@
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-  min-height: 48px; padding: .85rem 1.5rem; border-radius: var(--radius-sm);
+  min-height: 48px; padding: .85rem 1.75rem; border-radius: var(--radius-sm);
   font-weight: 700; font-size: .98rem; border: 1px solid transparent; cursor: pointer;
-  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease, opacity .15s ease;
   white-space: nowrap;
 }
 .btn:hover { transform: translateY(-2px); }
 .btn--primary { background: var(--primary); color: var(--primary-foreground); box-shadow: var(--shadow-primary); }
-.btn--primary:hover { background: var(--primary-600); }
-.btn--outline { background: transparent; color: var(--foreground); border-color: var(--border); }
-.btn--outline:hover { border-color: var(--primary-600); color: var(--primary-600); }
+.btn--primary:hover { opacity: .88; }
+.btn--outline { background: transparent; color: var(--foreground); border-color: var(--border-strong); }
+.btn--outline:hover { border-color: var(--foreground); }
 .btn--block { width: 100%; }
