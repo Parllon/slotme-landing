@@ -1,6 +1,6 @@
 .pain-card { display: flex; flex-direction: column; gap: .85rem; height: 100%; }
 .pain-card__icon {
-  width: 44px; height: 44px; border-radius: .75rem; background: rgba(18, 19, 23, .07); color: var(--foreground);
+  width: 44px; height: 44px; border-radius: .75rem; background: rgba(28, 53, 82, .07); color: var(--foreground);
   display: flex; align-items: center; justify-content: center;
 }
 .pain-card__title { font-size: 1.02rem; }

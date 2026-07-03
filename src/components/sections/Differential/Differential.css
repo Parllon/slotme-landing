@@ -4,7 +4,7 @@
 .differential__eyebrow {
   display: inline-flex; align-items: center; gap: .5rem;
   font-size: .8rem; font-weight: 600; letter-spacing: .02em;
-  color: var(--primary-600); background: rgba(18, 19, 23, .06);
+  color: var(--primary-600); background: rgba(28, 53, 82, .06);
   padding: .4rem .9rem; border-radius: 999px;
   margin-bottom: 1.1rem;
 }
@@ -14,7 +14,7 @@
 .differential__bullets li { display: flex; align-items: center; gap: .75rem; font-weight: 500; font-size: .95rem; }
 .differential__check {
   width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(18, 19, 23, .08); color: var(--foreground);
+  background: rgba(28, 53, 82, .08); color: var(--foreground);
   display: flex; align-items: center; justify-content: center;
 }
 
@@ -23,7 +23,7 @@
 .differential__panel {
   background: var(--background); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 1.5rem;
-  box-shadow: 0 16px 60px rgba(18, 19, 23, .10);
+  box-shadow: 0 16px 60px rgba(28, 53, 82, .10);
   width: 100%; max-width: 380px;
 }
 .differential__panel-header {
@@ -45,8 +45,8 @@
   padding: .75rem; border-radius: .75rem; background: var(--surface); margin-bottom: .6rem;
 }
 .differential__event-bar { width: 3px; border-radius: 99px; min-height: 40px; flex-shrink: 0; }
-.differential__event-bar--dark { background: var(--foreground); }
-.differential__event-bar--silver { background: var(--accent); }
+.differential__event-bar--primary { background: var(--primary); }
+.differential__event-bar--accent { background: var(--accent); }
 .differential__event-title { font-size: .82rem; font-weight: 600; color: var(--foreground); margin-bottom: .15rem; }
 .differential__event-sub { font-size: .72rem; color: var(--muted-foreground); }
 .differential__panel-note {

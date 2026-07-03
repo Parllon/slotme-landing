@@ -1,5 +1,6 @@
 import { Header } from "./components/sections/Header/Header";
 import { Hero } from "./components/sections/Hero/Hero";
+import { Segments } from "./components/sections/Segments/Segments";
 import { PainPoints } from "./components/sections/PainPoints/PainPoints";
 import { HowItWorks } from "./components/sections/HowItWorks/HowItWorks";
 import { Differential } from "./components/sections/Differential/Differential";
@@ -18,6 +19,7 @@ export default function App() {
       <Header />
       <main>
         <Hero />
+        <Segments />
         <PainPoints />
         <HowItWorks />
         <Differential />

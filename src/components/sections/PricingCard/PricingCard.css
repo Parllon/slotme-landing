@@ -4,7 +4,7 @@
 }
 .pricing-card--featured {
   background: var(--primary); border-color: var(--primary);
-  box-shadow: 0 20px 60px rgba(18, 19, 23, .35);
+  box-shadow: 0 20px 60px rgba(28, 53, 82, .35);
 }
 @media (min-width: 700px) { .pricing-card--featured { transform: scale(1.02); } }
 
@@ -22,12 +22,12 @@
 .pricing-card__list li { display: flex; align-items: flex-start; gap: .6rem; font-size: .92rem; }
 .pricing-card__list svg { color: var(--foreground); margin-top: .2rem; flex-shrink: 0; }
 
-/* Card em destaque: fundo preto, conteúdo claro */
+/* Card em destaque: fundo coral, conteúdo claro */
 .pricing-card--featured .pricing-card__name,
-.pricing-card--featured .pricing-card__value { color: #fff; }
+.pricing-card--featured .pricing-card__value { color: #f5f7fb; }
 .pricing-card--featured .pricing-card__cycle { color: rgba(255, 255, 255, .6); }
 .pricing-card--featured .pricing-card__list li { color: rgba(255, 255, 255, .9); }
 .pricing-card--featured .pricing-card__list svg { color: var(--accent); }
 .pricing-card--featured .btn--primary {
-  background: #fff; color: var(--foreground); box-shadow: none;
+  background: #f5f7fb; color: var(--foreground); box-shadow: none;
 }

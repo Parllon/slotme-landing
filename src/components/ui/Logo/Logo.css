@@ -1,9 +1,5 @@
 .logo { display: flex; align-items: center; gap: .6rem; font-family: var(--font-heading); font-weight: 800; font-size: 1.2rem; }
 .logo--clickable { cursor: pointer; }
-.logo__mark {
-  width: 34px; height: 34px; border-radius: 9px;
-  background: var(--primary);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--primary-foreground); font-weight: 800; font-size: 1.05rem; flex-shrink: 0;
-}
+.logo__mark { flex-shrink: 0; }
+.logo__pin { fill: var(--logo-pin, #1c3552); }
 .logo__name { color: var(--foreground); }

@@ -6,15 +6,15 @@
 .flow-carousel__controls { display: flex; align-items: center; gap: .75rem; }
 .flow-carousel__nav {
   width: 32px; height: 32px; border-radius: 50%;
-  background: rgba(18, 19, 23, .06); border: none; color: var(--foreground);
+  background: rgba(28, 53, 82, .06); border: none; color: var(--foreground);
   display: flex; align-items: center; justify-content: center; cursor: pointer;
   transition: background-color .2s ease;
 }
-.flow-carousel__nav:hover { background: rgba(18, 19, 23, .14); }
+.flow-carousel__nav:hover { background: rgba(28, 53, 82, .14); }
 
 .flow-carousel__dots { display: flex; gap: .4rem; }
 .flow-carousel__dot {
-  width: 8px; height: 8px; border-radius: 50%; background: rgba(18, 19, 23, .18); border: none; cursor: pointer;
+  width: 8px; height: 8px; border-radius: 50%; background: rgba(28, 53, 82, .18); border: none; cursor: pointer;
   transition: background-color .2s ease, transform .2s ease; padding: 0;
 }
 .flow-carousel__dot.is-active { background: var(--primary); transform: scale(1.3); }

@@ -1,6 +1,6 @@
 import {
   Clock, AlertTriangle, LayoutGrid, HelpCircle,
-  Layout, Calendar, Users, Bell, MessageCircle, Globe,
+  Layout, Users, Bell, Globe,
   Star,
 } from "lucide-react";
 
@@ -68,6 +68,13 @@ export const clients = [
   { name: "Bya Marcondes", service: "Designer de unhas", url: "https://byamarcondes.myvisual.com.br/", image: inicioByaMarcondes },
 ];
 
+/* Segmentos de público (chips logo após o Hero) */
+export const segmentsData = [
+  "Manicures", "Cabeleireiras", "Barbearias",
+  "Esteticistas", "Lash designers", "Maquiadoras",
+  "Depiladoras", "Massoterapeutas", "Podólogas",
+];
+
 /* Barra de dores */
 export const painPoints = [
   {
@@ -123,22 +130,48 @@ export const differential = {
   panel: {
     title: "Google Calendar",
     events: [
-      { title: "Corte + barba — João", sub: "Hoje · 14:00", tone: "dark" },
-      { title: "Escova — Mariana", sub: "Hoje · 15:30", tone: "silver" },
-      { title: "Sobrancelha — Ana", sub: "Hoje · 16:00", tone: "dark" },
+      { title: "Corte + barba — João", sub: "Hoje · 14:00", tone: "primary" },
+      { title: "Escova — Mariana", sub: "Hoje · 15:30", tone: "accent" },
+      { title: "Sobrancelha — Ana", sub: "Hoje · 16:00", tone: "primary" },
     ],
     note: "Agendamentos entram sozinhos, em tempo real",
   },
 };
 
-/* Recursos */
-export const services = [
-  { icon: Layout, title: "Página de agendamento própria", description: "Um link só seu, pra compartilhar no Instagram e no WhatsApp. No plano Completo, a página vem com a cara do seu salão." },
-  { icon: Calendar, title: "Integração com Google Calendar", description: "Cada agendamento cai automaticamente na agenda Google do profissional responsável." },
-  { icon: Users, title: "Multi-profissional", description: "Cada profissional da equipe tem sua própria agenda, seus próprios horários e sua própria disponibilidade." },
-  { icon: Bell, title: "Lembretes por Telegram", description: "Avisos automáticos antes do horário marcado, pra reduzir faltas e furos na agenda." },
-  { icon: MessageCircle, title: "Notificações por WhatsApp", description: "Como recurso complementar, o cliente também pode receber avisos por WhatsApp.", bonus: true },
-  { icon: Globe, title: "Sem instalar nada", description: "Funciona direto no navegador, no celular ou no computador — pra você e pros seus clientes." },
+/* Recursos — blocos editoriais alternados ("O que você ganha").
+   `image` é opcional: quando não houver captura real ainda, o bloco mostra um
+   placeholder listrado com a legenda `placeholder`. */
+export const featureRows = [
+  {
+    icon: Layout,
+    tag: "Página 24h",
+    title: "Cliente marca sozinho, a qualquer hora",
+    description: "Coloque o link da sua página no WhatsApp e na bio do Instagram. O cliente escolhe serviço, profissional e horário em segundos, sem te interromper.",
+    image: flow3,
+    imageAlt: "Página de agendamento do SlotMe no celular: calendário e horários livres",
+    placeholder: "screenshot: página de agendamento (mobile)",
+  },
+  {
+    icon: Bell,
+    tag: "Lembrete automático",
+    title: "Telegram avisa por você, no automático",
+    description: "Lembrete automático pelo Telegram antes do horário — e, como bônus, também pelo WhatsApp. Você não precisa abrir o app pra avisar ninguém.",
+    placeholder: "screenshot: lembrete enviado no Telegram",
+  },
+  {
+    icon: Users,
+    tag: "Equipe",
+    title: "Cada profissional, sua própria agenda",
+    description: "Cada integrante da equipe tem sua própria agenda, seus próprios horários e sua própria disponibilidade — sem sobreposição.",
+    placeholder: "screenshot: agenda da equipe",
+  },
+  {
+    icon: Globe,
+    tag: "Sem instalar nada",
+    title: "Funciona direto no navegador",
+    description: "Sem app pra baixar, sem conta pra criar. Funciona no celular ou no computador — pra você e pros seus clientes.",
+    placeholder: "screenshot: acesso pelo navegador",
+  },
 ];
 
 /* Planos e preços */

@@ -1,7 +1,7 @@
 .cta-final { position: relative; overflow: hidden; padding-inline: 1.25rem; }
 .cta-final__bg {
   position: absolute; inset: 0; z-index: 0;
-  background: linear-gradient(135deg, var(--dark) 0%, #24262c 50%, var(--dark) 100%);
+  background: linear-gradient(135deg, var(--dark) 0%, #22405f 50%, var(--dark) 100%);
 }
 .cta-final__bg::before {
   content: ""; position: absolute; top: -40%; right: -20%; width: 600px; height: 600px; border-radius: 50%;

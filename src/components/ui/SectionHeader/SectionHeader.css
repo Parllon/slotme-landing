@@ -3,7 +3,7 @@
 .section-header__eyebrow {
   display: inline-flex; align-items: center; gap: .5rem;
   font-size: .8rem; font-weight: 600; letter-spacing: .02em;
-  color: var(--primary-600); background: rgba(18, 19, 23, .06);
+  color: var(--primary-600); background: rgba(28, 53, 82, .06);
   padding: .4rem .9rem; border-radius: 999px;
   margin-bottom: 1.1rem;
 }

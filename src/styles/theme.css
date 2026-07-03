@@ -2,30 +2,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 /* =========================================================
-   TOKENS GLOBAIS — SlotMe (branco, prata e preto)
+   TOKENS GLOBAIS — SlotMe (navy + coral, handoff 2026-07)
    ========================================================= */
 :root {
   --font-heading: 'Sora', system-ui, sans-serif;
   --font-sans: 'Inter', system-ui, sans-serif;
 
-  --background: #ffffff;      /* branco puro */
-  --surface: #f4f5f7;         /* prata clara — seções alternadas / cards tingidos */
-  --surface-2: #e9ebef;       /* prata — superfícies elevadas / hover */
-  --foreground: #121317;      /* preto tinta */
-  --muted-foreground: #6d717b;
-  --primary: #17181c;         /* preto — ações principais */
-  --primary-600: #34363d;     /* grafite — texto de destaque em chips/ícones */
-  --primary-700: #000000;
-  --primary-foreground: #ffffff;
-  --accent: #c3c8d1;          /* prata metálica, uso pontual (badges, ribbon) */
-  --dark: #0f1013;            /* fundo das faixas escuras (CTA final, footer) */
-  --border: rgba(18, 19, 23, 0.10);
-  --border-strong: rgba(18, 19, 23, 0.22);
+  --background: #f5f7fb;      /* off-white azulado */
+  --surface: #edf1f8;         /* azul-gelo — seções alternadas / cards tingidos */
+  --surface-2: #e2e8f3;       /* azul-gelo mais fundo — superfícies elevadas */
+  --foreground: #1c3552;      /* navy */
+  --muted-foreground: #66738c;
+  --primary: #f2717f;         /* coral — cor de ação/CTA */
+  --primary-600: #c94a5c;     /* coral escuro — texto de chips/eyebrows */
+  --primary-700: #a83349;
+  --primary-foreground: #f5f7fb;
+  --accent: #9fb8dc;          /* azul claro, badges pontuais */
+  --dark: #16283f;            /* navy escuro — footer, CTA final */
+  --border: rgba(28, 53, 82, 0.10);
+  --border-strong: rgba(28, 53, 82, 0.22);
 
   --radius: 1.25rem;
   --radius-sm: 0.75rem;
   --maxw: 1200px;
-  --shadow-primary: 0 12px 40px rgba(18, 19, 23, 0.10);
+  --shadow-primary: 0 12px 40px rgba(28, 53, 82, 0.10);
 }
 
 /* Mapeia tokens para utilitários do Tailwind (bg-primary, text-muted, etc.) */

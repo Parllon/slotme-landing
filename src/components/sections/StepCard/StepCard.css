@@ -8,7 +8,7 @@
 }
 .step-card__connector {
   width: 2px; flex: 1; min-height: 32px; margin-block: .5rem;
-  background: rgba(18, 19, 23, .15);
+  background: rgba(28, 53, 82, .15);
 }
 .step-card__body { padding-bottom: 2.5rem; flex: 1; }
 .step-card:last-child .step-card__body { padding-bottom: 0; }
