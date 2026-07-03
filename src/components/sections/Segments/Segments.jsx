@@ -12,14 +12,14 @@ export function Segments() {
           title="Salões e barbearias de"
           highlight="todo tipo de serviço"
         />
-        <Reveal delay={0.1} className="segments__chips">
-          {segmentsData.map((name) => (
-            <span key={name} className="segments__chip">
-              <span className="segments__dot" aria-hidden="true" />
-              {name}
-            </span>
+        <div className="segments__grid">
+          {segmentsData.map(({ name, image }, i) => (
+            <Reveal key={name} y={24} delay={(i % 3) * 0.07} className="segments__card">
+              <img src={image} alt={name} loading="lazy" className="segments__photo" />
+              <span className="segments__label">{name}</span>
+            </Reveal>
           ))}
-        </Reveal>
+        </div>
       </div>
     </section>
   );

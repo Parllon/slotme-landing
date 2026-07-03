@@ -1,41 +1,64 @@
-.features { display: flex; flex-direction: column; gap: clamp(3.5rem, 6vw, 5.5rem); }
+.features { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+@media (min-width: 860px) { .features { grid-template-columns: 1fr 1fr; } }
 
-.feature-row { display: flex; flex-direction: column; gap: 2rem; align-items: center; }
-@media (min-width: 860px) {
-  .feature-row { flex-direction: row; gap: 3.5rem; }
-  .feature-row--reverse { flex-direction: row-reverse; }
+.feature-card {
+  background: var(--background); border: 1px solid var(--border); border-radius: 1.5rem;
+  padding: 2rem; display: flex; flex-direction: column; height: 100%;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
-.feature-row__text { flex: 1; }
-.feature-row__visual { flex: 1; width: 100%; }
+.feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(28, 53, 82, .08); }
 
-.feature-row__tag {
-  display: inline-flex; align-items: center; gap: .5rem;
-  font-size: .78rem; font-weight: 700; letter-spacing: .02em;
-  color: var(--foreground); background: var(--background);
-  border: 1px solid rgba(28, 53, 82, .12);
-  padding: .4rem .85rem; border-radius: 999px; margin-bottom: 1.1rem;
+.feature-card__head { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; }
+.feature-card__icon {
+  width: 44px; height: 44px; border-radius: .9rem; flex-shrink: 0;
+  background: rgba(242, 113, 127, .12); color: var(--primary-600);
+  display: flex; align-items: center; justify-content: center;
 }
-.feature-row__title {
-  font-size: clamp(1.3rem, 1.1rem + .7vw, 1.6rem);
-  margin: 0 0 .75rem; letter-spacing: -.01em; line-height: 1.25;
+.feature-card__tag {
+  display: inline-flex; align-items: center;
+  font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--foreground); background: var(--surface);
+  border: 1px solid var(--border); padding: .4rem .85rem; border-radius: 999px;
 }
-.feature-row__desc { color: var(--muted-foreground); margin: 0; max-width: 42ch; line-height: 1.7; font-size: 1rem; }
+.feature-card__title {
+  font-size: clamp(1.15rem, 1.05rem + .4vw, 1.35rem);
+  margin: 0 0 .6rem; letter-spacing: -.01em; line-height: 1.25;
+}
+.feature-card__desc {
+  color: var(--muted-foreground); margin: 0 0 1.5rem;
+  line-height: 1.7; font-size: .95rem;
+}
 
-/* Captura real do produto */
-.feature-row__shot {
-  height: 280px; border-radius: var(--radius); overflow: hidden;
-  border: 1px solid rgba(28, 53, 82, .12); background: var(--surface-2);
+/* Visual: celular inteiro (card "Página 24h") */
+.feature-card__phone-wrap { margin-top: auto; display: flex; justify-content: center; padding-block: .5rem; }
+.feature-card .phone-frame { width: min(250px, 70vw); margin-inline: 0; }
+
+/* Visual: conversa de lembrete (card "Lembrete automático") */
+.feature-card__chat {
+  margin-top: auto; display: flex; flex-direction: column; gap: 1.25rem; padding-block: .5rem;
 }
-.feature-row__shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.chat-bubble {
+  max-width: 85%; background: #d9f2c5; border-radius: 1rem; padding: .9rem 1rem .6rem;
+  box-shadow: 0 2px 6px rgba(28, 53, 82, .10); position: relative;
+  font-size: .88rem; line-height: 1.55; color: #1f2c34;
+}
+.chat-bubble--left { align-self: flex-start; border-top-left-radius: .25rem; }
+.chat-bubble--right { align-self: flex-end; border-top-right-radius: .25rem; }
+.chat-bubble__heading { display: block; margin-bottom: .4rem; font-size: .9rem; }
+.chat-bubble__body { margin: 0; }
+.chat-bubble__meta {
+  display: block; text-align: right; margin-top: .35rem;
+  font-size: .68rem; color: #6b7d70;
+}
 
 /* Placeholder listrado enquanto a captura real não existe */
-.feature-row__placeholder {
-  position: relative; height: 280px; border-radius: var(--radius); overflow: hidden;
+.feature-card__placeholder {
+  margin-top: auto; position: relative; height: 300px; border-radius: var(--radius); overflow: hidden;
   border: 1px solid rgba(28, 53, 82, .12);
   background: repeating-linear-gradient(135deg, #f5f7fb, #f5f7fb 12px, #e2e8f3 12px, #e2e8f3 24px);
   display: flex; align-items: center; justify-content: center;
 }
-.feature-row__placeholder span {
+.feature-card__placeholder span {
   background: rgba(255, 255, 255, .8); border: 1px solid rgba(28, 53, 82, .15);
   border-radius: .6rem; padding: .5rem 1rem;
   font-family: monospace; font-size: .78rem; color: var(--foreground);

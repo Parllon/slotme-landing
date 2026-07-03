@@ -14,6 +14,16 @@ import temaStudio from "../assets/screenshots/studio-1-profissional.jpg";
 import inicioStudioBeauty from "../assets/screenshots/studio-beauty-inicio.jpg";
 import inicioByaMarcondes from "../assets/screenshots/bya-marcondes-inicio.jpg";
 
+import segManicures from "../assets/segments/manicures.jpg";
+import segCabeleireiras from "../assets/segments/cabeleireiras.jpg";
+import segBarbearias from "../assets/segments/barbearias.jpg";
+import segEsteticistas from "../assets/segments/esteticistas.jpg";
+import segLash from "../assets/segments/lash-designers.jpg";
+import segMaquiadoras from "../assets/segments/maquiadoras.jpg";
+import segDepiladoras from "../assets/segments/depiladoras.jpg";
+import segMasso from "../assets/segments/massoterapeutas.jpg";
+import segPodologas from "../assets/segments/podologas.jpg";
+
 /* Marca / config global */
 export const brand = {
   name: "SlotMe",
@@ -68,11 +78,17 @@ export const clients = [
   { name: "Bya Marcondes", service: "Designer de unhas", url: "https://byamarcondes.myvisual.com.br/", image: inicioByaMarcondes },
 ];
 
-/* Segmentos de público (chips logo após o Hero) */
+/* Segmentos de público (cards de foto logo após o Hero) */
 export const segmentsData = [
-  "Manicures", "Cabeleireiras", "Barbearias",
-  "Esteticistas", "Lash designers", "Maquiadoras",
-  "Depiladoras", "Massoterapeutas", "Podólogas",
+  { name: "Manicures", image: segManicures },
+  { name: "Cabeleireiras", image: segCabeleireiras },
+  { name: "Barbearias", image: segBarbearias },
+  { name: "Esteticistas", image: segEsteticistas },
+  { name: "Lash designers", image: segLash },
+  { name: "Maquiadoras", image: segMaquiadoras },
+  { name: "Depiladoras", image: segDepiladoras },
+  { name: "Massoterapeutas", image: segMasso },
+  { name: "Podólogas", image: segPodologas },
 ];
 
 /* Barra de dores */
@@ -147,16 +163,43 @@ export const featureRows = [
     tag: "Página 24h",
     title: "Cliente marca sozinho, a qualquer hora",
     description: "Coloque o link da sua página no WhatsApp e na bio do Instagram. O cliente escolhe serviço, profissional e horário em segundos, sem te interromper.",
-    image: flow3,
-    imageAlt: "Página de agendamento do SlotMe no celular: calendário e horários livres",
-    placeholder: "screenshot: página de agendamento (mobile)",
+    visual: "phone",
+    image: flow1,
+    imageAlt: "Página de agendamento do SlotMe no celular",
   },
   {
     icon: Bell,
     tag: "Lembrete automático",
     title: "Telegram avisa por você, no automático",
     description: "Lembrete automático pelo Telegram antes do horário — e, como bônus, também pelo WhatsApp. Você não precisa abrir o app pra avisar ninguém.",
-    placeholder: "screenshot: lembrete enviado no Telegram",
+    visual: "chat",
+    /* Bolhas ilustrativas — espelham as mensagens reais de confirmação e lembrete */
+    chat: [
+      {
+        heading: "Confirme sua presença! ✅",
+        body: [
+          { t: "Olá, Maria! Passando pra confirmar seu horário de " },
+          { t: "Corte + escova", b: true },
+          { t: " — " },
+          { t: "quinta, 09/07 às 14:00", b: true },
+          { t: ". Responda " },
+          { t: "1", b: true },
+          { t: " pra confirmar. 💇‍♀️" },
+        ],
+        time: "09:00",
+        side: "left",
+      },
+      {
+        heading: "⏰ Corte + escova começa em 1h!",
+        body: [
+          { t: "Olá, Maria! Lembrando que seu horário é " },
+          { t: "hoje às 14:00", b: true },
+          { t: " com a Ana. Até já!" },
+        ],
+        time: "13:00",
+        side: "right",
+      },
+    ],
   },
   {
     icon: Users,

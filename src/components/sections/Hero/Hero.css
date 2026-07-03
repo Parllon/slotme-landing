@@ -18,7 +18,7 @@
   margin-bottom: 1.25rem;
 }
 .hero__title { font-size: clamp(2.3rem, 1.6rem + 2.8vw, 3.75rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
-.hero__title-accent { color: var(--muted-foreground); }
+.hero__title-accent { color: var(--primary); }
 .hero__subtitle {
   margin: 1.25rem 0 0; color: var(--muted-foreground);
   font-size: clamp(1.05rem, .95rem + .35vw, 1.2rem); max-width: 52ch; line-height: 1.6;
