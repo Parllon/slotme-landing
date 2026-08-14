@@ -1,14 +1,22 @@
 import { SectionHeader } from "../../ui/SectionHeader/SectionHeader";
 import { Reveal } from "../../ui/Reveal/Reveal";
 import { PhoneFrame } from "../../ui/PhoneFrame/PhoneFrame";
+import { BrowserFrame } from "../../ui/BrowserFrame/BrowserFrame";
 import { featureRows } from "../../../data/content";
 import "./Services.css";
 
-function FeatureVisual({ visual, image, imageAlt, chat, placeholder }) {
+function FeatureVisual({ visual, image, imageAlt, url, chat, placeholder }) {
   if (visual === "phone") {
     return (
       <div className="feature-card__phone-wrap">
         <PhoneFrame src={image} alt={imageAlt} className="feature-card__phone" />
+      </div>
+    );
+  }
+  if (visual === "browser") {
+    return (
+      <div className="feature-card__browser-wrap">
+        <BrowserFrame src={image} alt={imageAlt} url={url} />
       </div>
     );
   }

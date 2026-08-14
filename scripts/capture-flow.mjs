@@ -80,6 +80,19 @@ async function capturarFluxoCompleto(page, prefixo) {
   await shot(page, `${prefixo}-5-revisar`);
 }
 
+const VIEWPORT_DESKTOP = { width: 1440, height: 900, deviceScaleFactor: 1.5, isMobile: false, hasTouch: false };
+
+async function capturarTelaDesktop(page) {
+  await page.waitForSelector('#lista-profissionais button', { timeout: 15000 });
+  await esperarAssentar(350);
+  // Full viewport (sem recorte): o layout é centralizado (max-w-xl) mesmo em tela
+  // larga, e é exatamente esse "card centralizado numa janela grande" que prova a
+  // reivindicação de "funciona no navegador do computador" — o card exibido dentro
+  // de um mockup de janela de navegador (ver BrowserFrame) já resolve a legibilidade.
+  await page.screenshot({ path: resolve(OUT_DIR, 'studio-desktop.jpg'), fullPage: false, type: 'jpeg', quality: 85 });
+  console.log('  ✓ studio-desktop.jpg');
+}
+
 const browser = await puppeteer.launch({
   executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -92,6 +105,13 @@ try {
   await page1.goto('https://studiobeleza.agendamentos.app.br', { waitUntil: 'networkidle0' });
   await capturarFluxoCompleto(page1, 'studio');
   await page1.close();
+
+  console.log('Studio Beleza — tela desktop (navegador)...');
+  const page2 = await browser.newPage();
+  await page2.setViewport(VIEWPORT_DESKTOP);
+  await page2.goto('https://studiobeleza.agendamentos.app.br', { waitUntil: 'networkidle0' });
+  await capturarTelaDesktop(page2);
+  await page2.close();
 } finally {
   await browser.close();
 }

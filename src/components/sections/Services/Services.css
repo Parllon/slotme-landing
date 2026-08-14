@@ -33,6 +33,9 @@
 .feature-card__phone-wrap { margin-top: auto; display: flex; justify-content: center; padding-block: .5rem; }
 .feature-card .phone-frame { width: min(250px, 70vw); margin-inline: 0; }
 
+/* Visual: janela de navegador (card "Sem instalar nada") */
+.feature-card__browser-wrap { margin-top: auto; padding-block: .5rem; }
+
 /* Visual: conversa de lembrete (card "Lembrete automático") */
 .feature-card__chat {
   margin-top: auto; display: flex; flex-direction: column; gap: 1.25rem; padding-block: .5rem;

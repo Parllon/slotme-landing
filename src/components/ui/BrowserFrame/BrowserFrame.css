@@ -1,0 +1,24 @@
+.browser-frame {
+  width: 100%; background: #05070a; border-radius: 1rem; padding: .5rem .5rem 0;
+  box-shadow: 0 30px 60px -25px rgba(0, 0, 0, .65), 0 0 0 1px rgba(255, 255, 255, .05);
+  overflow: hidden;
+}
+.browser-frame__bar {
+  display: flex; align-items: center; gap: .4rem; padding: 0 .35rem .5rem;
+}
+.browser-frame__dot { width: 9px; height: 9px; border-radius: 999px; flex-shrink: 0; }
+.browser-frame__dot--red { background: #ec6a5e; }
+.browser-frame__dot--yellow { background: #f4bf4f; }
+.browser-frame__dot--green { background: #61c454; }
+.browser-frame__url {
+  margin-left: .5rem; flex: 1; min-width: 0;
+  background: #1c2029; border-radius: 999px; padding: .3rem .8rem;
+  font-size: .72rem; color: #8b93a3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.browser-frame__screen {
+  aspect-ratio: 16 / 10; overflow: hidden;
+  background: var(--surface); border-radius: .6rem .6rem 0 0;
+}
+.browser-frame__img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
+}
