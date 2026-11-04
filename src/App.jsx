@@ -12,6 +12,7 @@ import { Faq } from "./components/sections/Faq/Faq";
 import { Contact } from "./components/sections/Contact/Contact";
 import { Footer } from "./components/sections/Footer/Footer";
 import { FloatingWhatsApp } from "./components/ui/FloatingWhatsApp/FloatingWhatsApp";
+import { FloatingInstagram } from "./components/ui/FloatingInstagram/FloatingInstagram";
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <FloatingInstagram />
       <FloatingWhatsApp />
     </div>
   );

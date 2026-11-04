@@ -33,9 +33,7 @@ export function Footer() {
       </div>
 
       <div className="container-x footer__bottom">
-        <span>&copy; {year} {brand.name}. Todos os direitos reservados.</span>
-        <span>{footerData.cnpj}</span>
-      </div>
+        <span>&copy; {year} {brand.name}. Todos os direitos reservados.</span>      </div>
     </footer>
   );
 }

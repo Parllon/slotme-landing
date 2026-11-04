@@ -38,6 +38,12 @@ export const whatsapp = {
   message: "Oi! Quero saber mais sobre o SlotMe.",
 };
 
+export const instagram = {
+  url: "https://www.instagram.com/slotme_agenda/",
+  handle: "@slotme_agenda",
+  tooltip: "Siga no Instagram",
+};
+
 /* Navegação (Header / Footer) */
 export const navLinks = [
   { href: "#como-funciona", label: "Como funciona" },
@@ -304,7 +310,6 @@ export const ctaFinal = {
 /* Rodapé */
 export const footerData = {
   about: "Agendamento online integrado ao Google Calendar, feito para salões e barbearias de pequeno porte.",
-  cnpj: "[CNPJ — preencher]",
 };
 
 /* Ícone reaproveitado no ribbon de plano recomendado */
