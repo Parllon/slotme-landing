@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;1,500&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { background: transparent; }
+  body { width: 1000px; height: 680px; position: relative; font-family: Inter, sans-serif; overflow: hidden; }
+
+  /* ---------- Janela do navegador ---------- */
+  .win { position: absolute; left: 20px; top: 40px; width: 780px; height: 540px; background: #05070a; border-radius: 18px;
+    padding: 10px 10px 0; box-shadow: 0 40px 70px -30px rgba(22,40,63,.55); }
+  .bar { display: flex; align-items: center; gap: 7px; padding: 2px 6px 10px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .url { margin-left: 10px; flex: 1; background: #1c2029; border-radius: 999px; padding: 6px 14px; font-size: 12px; color: #8b93a3;
+    display: flex; align-items: center; gap: 8px; }
+  .url svg { width: 11px; height: 11px; }
+  .screen { height: calc(100% - 33px); border-radius: 10px 10px 0 0; overflow: hidden; position: relative;
+    background: radial-gradient(circle at 15% 20%, #fbe4ec 0, transparent 45%), radial-gradient(circle at 90% 10%, #fbefe6 0, transparent 40%), #fcf6f9; }
+
+  .sb { font-family: Lato, sans-serif; color: #b03060; text-align: center; }
+  .sb .kicker { font-size: 10px; letter-spacing: .3em; color: #a0788a; padding-top: 26px; }
+  .sb .name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 36px; color: #c2335f; margin-top: 4px; }
+  .sb .line { width: 46px; height: 1px; background: #e6c48a; margin: 8px auto 0; }
+
+  .d-body { width: 520px; margin: 18px auto 0; font-family: Lato, sans-serif; }
+  .d-body h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 22px; color: #c2335f; }
+  .d-body p { color: #a0788a; font-size: 13px; margin-top: 2px; }
+  .d-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 16px; }
+  .cal { background: #fff; border-radius: 14px; padding: 14px; box-shadow: 0 6px 20px rgba(194,51,95,.08); }
+  .cal-h { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: #7a3150; margin-bottom: 8px; }
+  .cal-g { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 10.5px; color: #7a3150; }
+  .cal-g .w { color: #c4a3b2; font-size: 9.5px; font-weight: 700; }
+  .cal-g span { padding: 4px 0; border-radius: 6px; }
+  .cal-g .x { color: #dccbd3; }
+  .cal-g .sel { background: #c2335f; color: #fff; font-weight: 700; }
+  .slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-content: start; }
+  .slots span { background: #fff; border: 1px solid #f1d5e0; border-radius: 10px; padding: 9px 0; text-align: center; font-size: 12px; color: #7a3150; font-weight: 700; }
+  .slots .sel { background: #c2335f; border-color: #c2335f; color: #fff; }
+  .slots-title { grid-column: 1 / -1; font-size: 12px; font-weight: 700; color: #7a3150; }
+  .d-btn { margin: 18px 0 0 auto; width: 150px; background: #c2335f; color: #fff; border-radius: 10px; padding: 10px 0; text-align: center; font-size: 13px; font-weight: 700; }
+
+  /* ---------- Celular ---------- */
+  .phone { position: absolute; right: 40px; top: 120px; width: 250px; height: 520px; background: #05070a; border-radius: 38px;
+    padding: 9px 9px 12px; box-shadow: 0 40px 70px -25px rgba(22,40,63,.6), 0 0 0 1px rgba(255,255,255,.05); }
+  .notch { width: 64px; height: 6px; background: #2a2e34; border-radius: 999px; margin: 0 auto 8px; }
+  .p-screen { height: calc(100% - 14px); border-radius: 28px; overflow: hidden;
+    background: radial-gradient(circle at 20% 10%, #fbe4ec 0, transparent 55%), #fcf6f9; }
+  .p-screen .sb .kicker { padding-top: 20px; font-size: 8px; }
+  .p-screen .sb .name { font-size: 26px; }
+  .p-body { padding: 14px 16px 0; font-family: Lato, sans-serif; }
+  .p-body h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 17px; color: #c2335f; }
+  .p-body p { color: #a0788a; font-size: 10.5px; }
+  .p-body .cal { margin-top: 10px; padding: 10px; border-radius: 12px; }
+  .p-body .cal-g { font-size: 9px; gap: 2px; }
+  .p-body .cal-g .w { font-size: 8px; }
+  .p-body .cal-g span { padding: 3px 0; }
+  .p-body .cal-h { font-size: 10px; margin-bottom: 6px; }
+  .p-body .slots { margin-top: 10px; gap: 6px; }
+  .p-body .slots span { font-size: 10px; padding: 7px 0; border-radius: 8px; }
+  .p-body .slots-title { font-size: 10px; }
+
+  /* ---------- Selos ---------- */
+  .chip { position: absolute; display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 14px; padding: 11px 16px 11px 11px;
+    box-shadow: 0 14px 34px -12px rgba(22,40,63,.35); font-size: 14px; font-weight: 600; color: #1c3552; }
+  .chip i { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: rgba(242,113,127,.14); color: #c94a5c; font-style: normal; }
+  .chip i svg { width: 16px; height: 16px; }
+  .chip1 { left: 0; top: 555px; }
+  .chip2 { left: 230px; top: 600px; }
+</style>
+</head>
+<body>
+  <div class="win">
+    <div class="bar">
+      <span class="dot" style="background:#ec6a5e"></span><span class="dot" style="background:#f4bf4f"></span><span class="dot" style="background:#61c454"></span>
+      <div class="url"><svg viewBox="0 0 24 24" fill="none" stroke="#8b93a3" stroke-width="2.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>studiobeleza.agendamentos.app.br</div>
+    </div>
+    <div class="screen">
+      <div class="sb"><div class="kicker">SALÃO DE BELEZA</div><div class="name">Studio Beleza</div><div class="line"></div></div>
+      <div class="d-body">
+        <h2>Escolha o horário</h2>
+        <p>Com Ana Costa · Corte + escova</p>
+        <div class="d-row">
+          <div class="cal">
+            <div class="cal-h"><span>Julho 2026</span><span>‹ ›</span></div>
+            <div class="cal-g">
+              <span class="w">D</span><span class="w">S</span><span class="w">T</span><span class="w">Q</span><span class="w">Q</span><span class="w">S</span><span class="w">S</span>
+              <span></span><span></span><span class="x">1</span><span class="x">2</span><span class="x">3</span><span class="x">4</span><span class="x">5</span>
+              <span class="x">6</span><span class="x">7</span><span>8</span><span class="sel">9</span><span>10</span><span>11</span><span class="x">12</span>
+              <span class="x">13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span class="x">19</span>
+              <span class="x">20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span class="x">26</span>
+            </div>
+          </div>
+          <div class="slots">
+            <div class="slots-title">Quinta, 09/07</div>
+            <span>09:00</span><span>10:30</span><span>11:00</span><span class="sel">14:00</span><span>15:00</span><span>16:30</span><span>17:00</span><span>17:30</span>
+          </div>
+        </div>
+        <div class="d-btn">Avançar →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="p-screen">
+      <div class="sb"><div class="kicker">SALÃO DE BELEZA</div><div class="name">Studio Beleza</div><div class="line"></div></div>
+      <div class="p-body">
+        <h2>Escolha o horário</h2>
+        <p>Com Ana Costa · Corte + escova</p>
+        <div class="cal">
+          <div class="cal-h"><span>Julho 2026</span><span>‹ ›</span></div>
+          <div class="cal-g">
+            <span class="w">D</span><span class="w">S</span><span class="w">T</span><span class="w">Q</span><span class="w">Q</span><span class="w">S</span><span class="w">S</span>
+            <span></span><span></span><span class="x">1</span><span class="x">2</span><span class="x">3</span><span class="x">4</span><span class="x">5</span>
+            <span class="x">6</span><span class="x">7</span><span>8</span><span class="sel">9</span><span>10</span><span>11</span><span class="x">12</span>
+            <span class="x">13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span class="x">19</span>
+          </div>
+        </div>
+        <div class="slots">
+          <div class="slots-title">Quinta, 09/07</div>
+          <span>09:00</span><span>10:30</span><span>11:00</span><span class="sel">14:00</span><span>15:00</span><span>16:30</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chip chip1"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/><path d="M4 4l16 16"/></svg></i>Sem app pra baixar</div>
+  <div class="chip chip2"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/><path d="M4 4l16 16"/></svg></i>Sem conta pra criar</div>
+</body>
+</html>

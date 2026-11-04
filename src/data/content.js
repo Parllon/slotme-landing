@@ -13,7 +13,8 @@ import temaNavalha from "../assets/screenshots/navalha-1-profissional.jpg";
 import temaStudio from "../assets/screenshots/studio-1-profissional.jpg";
 import inicioStudioBeauty from "../assets/screenshots/studio-beauty-inicio.jpg";
 import inicioByaMarcondes from "../assets/screenshots/bya-marcondes-inicio.jpg";
-import shotDesktop from "../assets/screenshots/studio-desktop.jpg";
+import featEquipe from "../assets/features/equipe-agenda.jpg";
+import featSemInstalar from "../assets/features/sem-instalar.webp";
 
 import segManicures from "../assets/segments/manicures.jpg";
 import segCabeleireiras from "../assets/segments/cabeleireiras.jpg";
@@ -208,18 +209,17 @@ export const featureRows = [
     title: "Cada profissional, sua própria agenda",
     description: "Cada integrante da equipe tem sua própria agenda, seus próprios horários e sua própria disponibilidade — sem sobreposição.",
     visual: "phone",
-    image: temaNavalha,
-    imageAlt: "Lista de profissionais da equipe, cada um com sua própria agenda",
+    image: featEquipe,
+    imageAlt: "Agenda da equipe no celular: três profissionais lado a lado, cada uma com seus próprios horários, sem sobreposição",
   },
   {
     icon: Globe,
     tag: "Sem instalar nada",
     title: "Funciona direto no navegador",
     description: "Sem app pra baixar, sem conta pra criar. Funciona no celular ou no computador — pra você e pros seus clientes.",
-    visual: "browser",
-    image: shotDesktop,
-    imageAlt: "Página de agendamento do SlotMe aberta no navegador do computador",
-    url: "studiobeleza.agendamentos.app.br",
+    visual: "image",
+    image: featSemInstalar,
+    imageAlt: "A mesma página de agendamento aberta no navegador do computador e no celular — sem app pra baixar e sem conta pra criar",
   },
 ];
 

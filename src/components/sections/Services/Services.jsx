@@ -20,6 +20,13 @@ function FeatureVisual({ visual, image, imageAlt, url, chat, placeholder }) {
       </div>
     );
   }
+  if (visual === "image") {
+    return (
+      <div className="feature-card__image-wrap">
+        <img src={image} alt={imageAlt} className="feature-card__image" loading="lazy" />
+      </div>
+    );
+  }
   if (visual === "chat") {
     return (
       <div className="feature-card__chat">

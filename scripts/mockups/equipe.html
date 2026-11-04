@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f7fb; --surface: #ffffff; --navy: #1c3552; --muted: #66738c;
+    --border: rgba(28,53,82,.10); --coral: #f2717f;
+    --ana: #f2717f; --ana-bg: #fde8eb;
+    --cas: #5b8fd6; --cas-bg: #e3edfa;
+    --bru: #3fae8c; --bru-bg: #dff3ec;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { width: 390px; height: 844px; background: var(--bg); font-family: Inter, sans-serif; color: var(--navy); overflow: hidden; }
+  .top { padding: 44px 20px 12px; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #c94a5c; }
+  h1 { font-family: Sora, sans-serif; font-size: 24px; margin-top: 6px; letter-spacing: -.01em; }
+  .date { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; }
+  .date span { font-size: 14px; font-weight: 600; }
+  .arrows { display: flex; gap: 6px; }
+  .arrows i { width: 30px; height: 30px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border);
+    display: grid; place-items: center; font-style: normal; font-size: 14px; color: var(--muted); }
+
+  .pros { display: grid; grid-template-columns: 44px repeat(3, 1fr); gap: 6px; padding: 6px 14px 10px 10px; }
+  .pro { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+    font-family: Sora, sans-serif; font-weight: 700; font-size: 16px; color: #fff; }
+  .pro b { font-size: 11.5px; font-weight: 600; }
+  .pro small { font-size: 9.5px; color: var(--muted); margin-top: -4px; }
+
+  .grid { zoom: .9; position: relative; margin: 0 14px 0 10px; display: grid; grid-template-columns: 44px repeat(3, 1fr); gap: 6px; }
+  .hours { position: relative; }
+  .hours div { height: 56px; font-size: 10.5px; color: var(--muted); font-weight: 500; transform: translateY(-6px); }
+  .col { position: relative; height: calc(56px * 10); background: var(--surface); border-radius: 12px; border: 1px solid var(--border); overflow: hidden;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 55px, rgba(28,53,82,.07) 55px 56px); }
+  .off { position: absolute; left: 0; right: 0; background: repeating-linear-gradient(135deg, #eef1f6 0 6px, #e4e9f1 6px 12px);
+    display: grid; place-items: center; font-size: 9.5px; color: var(--muted); font-weight: 600; letter-spacing: .02em; }
+  .ev { position: absolute; left: 4px; right: 4px; border-radius: 8px; padding: 6px 7px; border-left: 3px solid; overflow: hidden; }
+  .ev b { display: block; font-size: 10.5px; font-weight: 700; line-height: 1.25; }
+  .ev span { display: block; font-size: 9.5px; color: var(--muted); margin-top: 2px; line-height: 1.25; }
+  .ana { background: var(--ana-bg); border-color: var(--ana); }
+  .cas { background: var(--cas-bg); border-color: var(--cas); }
+  .bru { background: var(--bru-bg); border-color: var(--bru); }
+
+  .legend { margin: 14px 14px 0; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px;
+    display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--navy); }
+  .legend .check { width: 26px; height: 26px; border-radius: 8px; background: #dff3ec; color: #2c8b6d; display: grid; place-items: center; font-weight: 700; flex-shrink: 0; }
+  .legend small { display: block; color: var(--muted); font-size: 11px; margin-top: 1px; }
+</style>
+</head>
+<body>
+  <div class="top">
+    <div class="eyebrow">Agenda da equipe</div>
+    <h1>Studio Beleza</h1>
+    <div class="date">
+      <span>Quinta, 09 de julho</span>
+      <div class="arrows"><i>‹</i><i>›</i></div>
+    </div>
+  </div>
+
+  <div class="pros">
+    <div></div>
+    <div class="pro"><div class="avatar" style="background:var(--ana)">A</div><b>Ana</b><small>9h–18h</small></div>
+    <div class="pro"><div class="avatar" style="background:var(--cas)">C</div><b>Cássia</b><small>10h–19h</small></div>
+    <div class="pro"><div class="avatar" style="background:var(--bru)">B</div><b>Bruna</b><small>9h–15h</small></div>
+  </div>
+
+  <div class="grid">
+    <div class="hours">
+      <div>09:00</div><div>10:00</div><div>11:00</div><div>12:00</div><div>13:00</div>
+      <div>14:00</div><div>15:00</div><div>16:00</div><div>17:00</div><div>18:00</div>
+    </div>
+
+    <!-- Ana: 9h-18h, almoço 12-13 -->
+    <div class="col">
+      <div class="ev ana" style="top:4px;height:104px"><b>Corte + escova</b><span>Maria F.</span></div>
+      <div class="ev ana" style="top:116px;height:48px"><b>Hidratação</b><span>Júlia</span></div>
+      <div class="off" style="top:168px;height:56px">Almoço</div>
+      <div class="ev ana" style="top:284px;height:76px"><b>Escova</b><span>Débora</span></div>
+      <div class="ev ana" style="top:396px;height:104px"><b>Coloração</b><span>Renata S.</span></div>
+      <div class="off" style="top:504px;height:56px">Fora do expediente</div>
+    </div>
+
+    <!-- Cássia: 10h-19h -->
+    <div class="col">
+      <div class="off" style="top:0;height:56px">Fora</div>
+      <div class="ev cas" style="top:60px;height:48px"><b>Escova</b><span>Patrícia</span></div>
+      <div class="ev cas" style="top:172px;height:132px"><b>Mechas</b><span>Camila R.</span></div>
+      <div class="off" style="top:336px;height:56px">Almoço</div>
+      <div class="ev cas" style="top:396px;height:48px"><b>Corte</b><span>Luana</span></div>
+      <div class="ev cas" style="top:452px;height:76px"><b>Progressiva</b><span>Bianca</span></div>
+    </div>
+
+    <!-- Bruna: 9h-15h -->
+    <div class="col">
+      <div class="ev bru" style="top:32px;height:48px"><b>Manicure</b><span>Fernanda</span></div>
+      <div class="ev bru" style="top:116px;height:76px"><b>Pé + mão</b><span>Larissa</span></div>
+      <div class="ev bru" style="top:228px;height:48px"><b>Esmaltação</b><span>Sofia</span></div>
+      <div class="ev bru" style="top:284px;height:48px"><b>Manicure</b><span>Aline</span></div>
+      <div class="off" style="top:336px;height:224px">Folga à tarde</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="check">✓</div>
+    <div>Cada uma com seus horários<small>Nenhum agendamento sobreposto</small></div>
+  </div>
+</body>
+</html>

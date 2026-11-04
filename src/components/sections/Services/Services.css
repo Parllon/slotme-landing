@@ -36,6 +36,10 @@
 /* Visual: janela de navegador (card "Sem instalar nada") */
 .feature-card__browser-wrap { margin-top: auto; padding-block: .5rem; }
 
+/* Visual: ilustração solta com fundo transparente (card "Sem instalar nada") */
+.feature-card__image-wrap { margin-top: auto; padding-block: .5rem; }
+.feature-card__image { width: 100%; height: auto; }
+
 /* Visual: conversa de lembrete (card "Lembrete automático") */
 .feature-card__chat {
   margin-top: auto; display: flex; flex-direction: column; gap: 1.25rem; padding-block: .5rem;
