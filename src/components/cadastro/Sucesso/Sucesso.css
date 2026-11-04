@@ -1,0 +1,16 @@
+.sucesso { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem; padding-block: 1rem 2rem; }
+.sucesso__icone { color: #1f9d55; }
+.sucesso h1 { font-size: clamp(1.5rem, 5vw, 1.9rem); outline: none; }
+.sucesso__protocolo { margin: 0; padding: .4rem .9rem; border-radius: 99px; background: var(--surface); font-size: .92rem; }
+.sucesso h2 { margin-top: .75rem; font-size: 1.05rem; align-self: flex-start; }
+.sucesso__passos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .7rem; width: 100%; text-align: left; }
+.sucesso__passos li { display: flex; gap: .8rem; align-items: flex-start; padding: .9rem 1rem; border-radius: var(--radius-sm); background: #fff; border: 1px solid var(--border); }
+.sucesso__passos strong { display: block; margin-bottom: .15rem; }
+.sucesso__passos span:last-child { font-size: .9rem; line-height: 1.5; color: var(--muted-foreground); word-break: break-word; }
+.sucesso__passos span:last-child strong { color: var(--foreground); font-size: .95rem; }
+.sucesso__num {
+  flex-shrink: 0; width: 1.9rem; height: 1.9rem; border-radius: 99px; display: grid; place-items: center;
+  font-weight: 700; color: #fff; background: var(--primary);
+}
+.sucesso .btn { margin-top: .5rem; }
+.sucesso__voltar { font-weight: 600; color: var(--muted-foreground); text-decoration: underline; padding: .5rem; }

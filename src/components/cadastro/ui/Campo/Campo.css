@@ -1,0 +1,54 @@
+/* Campo + controles de formulário do cadastro (reaproveitados em todas as etapas) */
+.campo { display: flex; flex-direction: column; gap: .4rem; }
+.campo__label { font-weight: 600; font-size: .95rem; color: var(--foreground); }
+.campo__dica { margin: 0; font-size: .85rem; color: var(--muted-foreground); line-height: 1.45; }
+.campo__erro {
+  margin: 0; font-size: .87rem; font-weight: 600; color: var(--cad-erro);
+  display: flex; gap: .35rem; align-items: flex-start; line-height: 1.4;
+}
+.campo__erro::before { content: "!"; flex-shrink: 0; width: 1.05rem; height: 1.05rem; border-radius: 99px; background: var(--cad-erro); color: #fff; font-size: .72rem; display: grid; place-items: center; margin-top: .1rem; }
+.campo__erro--grupo { padding: .75rem .9rem; border-radius: var(--radius-sm); background: var(--cad-erro-fundo); }
+
+.cad-input,
+.cad-select,
+.cad-textarea {
+  width: 100%;
+  min-height: 50px;
+  padding: .75rem .95rem;
+  font: inherit;
+  font-size: 1rem; /* 16px evita o zoom automático do iPhone ao focar */
+  color: var(--foreground);
+  background: #fff;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  transition: border-color .15s ease, box-shadow .15s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.cad-textarea { min-height: 96px; resize: vertical; line-height: 1.5; }
+.cad-select {
+  padding-right: 2.4rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2366738c' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .95rem center;
+}
+.cad-input::placeholder,
+.cad-textarea::placeholder { color: #9aa5b8; }
+.cad-input:focus,
+.cad-select:focus,
+.cad-textarea:focus { outline: none; border-color: var(--foreground); box-shadow: 0 0 0 4px rgba(28, 53, 82, .12); }
+.cad-input:disabled,
+.cad-select:disabled { background: var(--surface); color: var(--muted-foreground); cursor: not-allowed; }
+.campo--erro .cad-input,
+.campo--erro .cad-select,
+.campo--erro .cad-textarea,
+.cad-input[aria-invalid="true"],
+.cad-select[aria-invalid="true"] { border-color: var(--cad-erro); background: var(--cad-erro-fundo); }
+
+/* Campo com prefixo (R$) */
+.cad-prefixo { position: relative; }
+.cad-prefixo > span {
+  position: absolute; left: .95rem; top: 50%; transform: translateY(-50%);
+  font-weight: 600; color: var(--muted-foreground); pointer-events: none;
+}
+.cad-prefixo > .cad-input { padding-left: 2.6rem; }

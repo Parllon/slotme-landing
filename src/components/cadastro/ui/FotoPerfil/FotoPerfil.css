@@ -1,0 +1,31 @@
+.foto-perfil { display: flex; align-items: center; gap: .85rem; min-width: 0; }
+.foto-perfil__avatar {
+  position: relative; flex-shrink: 0; width: 64px; height: 64px; padding: 0; cursor: pointer;
+  border-radius: 99px; border: 2px dashed var(--border-strong); background: var(--surface);
+  display: grid; place-items: center; overflow: visible;
+  font-family: var(--font-heading); font-weight: 700; font-size: 1.4rem; color: var(--foreground);
+  transition: border-color .15s ease;
+}
+.foto-perfil__avatar:hover { border-color: var(--primary); }
+.foto-perfil__avatar:has(img) { border-style: solid; border-color: #fff; box-shadow: 0 0 0 1.5px var(--border-strong); }
+.foto-perfil__avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 99px; }
+.foto-perfil__camera {
+  position: absolute; right: -2px; bottom: -2px; width: 26px; height: 26px; border-radius: 99px;
+  display: grid; place-items: center; background: var(--primary); color: #fff; border: 2px solid #fff;
+}
+.foto-perfil__girando { animation: foto-girar 1s linear infinite; }
+@keyframes foto-girar { to { transform: rotate(360deg); } }
+
+.foto-perfil__info { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
+.foto-perfil__info strong { line-height: 1.25; word-break: break-word; }
+.foto-perfil__info small { font-size: .82rem; color: var(--muted-foreground); word-break: break-all; }
+.foto-perfil__acoes { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .3rem; }
+.foto-perfil__acoes button {
+  display: inline-flex; align-items: center; gap: .25rem; min-height: 34px; padding: .3rem .8rem; cursor: pointer;
+  font: inherit; font-size: .84rem; font-weight: 700; border-radius: 99px;
+  color: var(--foreground); background: #fff; border: 1.5px solid var(--border-strong);
+}
+.foto-perfil__acoes button:hover:not(:disabled) { border-color: var(--foreground); }
+.foto-perfil__acoes button:disabled { opacity: .6; cursor: wait; }
+.foto-perfil__acoes .foto-perfil__remover { color: var(--muted-foreground); border-color: transparent; background: transparent; }
+.foto-perfil__acoes .foto-perfil__remover:hover { color: var(--cad-erro); border-color: transparent; }

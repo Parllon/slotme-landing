@@ -1,5 +1,6 @@
 import { Logo } from "../../ui/Logo/Logo";
 import { navLinks, brand, whatsapp, footerData } from "../../../data/content";
+import { linkRodape } from "../../../data/privacidade";
 import "./Footer.css";
 
 export function Footer() {
@@ -28,6 +29,7 @@ export function Footer() {
           <ul>
             <li><a href={waUrl} target="_blank" rel="noopener noreferrer">WhatsApp comercial</a></li>
             <li><a href={`https://${brand.domain}/`} target="_blank" rel="noopener noreferrer">{brand.domain}</a></li>
+            <li><a href={linkRodape.href}>{linkRodape.label}</a></li>
           </ul>
         </div>
       </div>

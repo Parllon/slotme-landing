@@ -1,0 +1,37 @@
+.opcoes { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: .55rem; }
+.opcoes__legenda { padding: 0; margin-bottom: .55rem; font-weight: 600; font-size: .95rem; color: var(--foreground); }
+.opcoes__lista { display: flex; flex-wrap: wrap; gap: .5rem; }
+.opcoes--cartao .opcoes__lista { display: grid; grid-template-columns: repeat(var(--colunas, 1), minmax(0, 1fr)); gap: .6rem; }
+
+.opcoes__item {
+  position: relative; display: flex; align-items: center; gap: .65rem;
+  cursor: pointer; user-select: none;
+  border: 1.5px solid var(--border-strong); background: #fff; color: var(--foreground);
+  transition: border-color .15s ease, background-color .15s ease, box-shadow .15s ease;
+}
+/* O input real fica invisível, mas continua recebendo foco e clique */
+.opcoes__item input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.opcoes__item:has(input:focus-visible) { box-shadow: 0 0 0 4px rgba(28, 53, 82, .18); border-color: var(--foreground); }
+.opcoes__item:hover { border-color: var(--foreground); }
+
+/* Pílula */
+.opcoes--chip .opcoes__item { min-height: 44px; padding: .55rem 1rem; border-radius: 99px; font-weight: 600; font-size: .93rem; }
+.opcoes--chip .opcoes__item--ativo { background: var(--foreground); border-color: var(--foreground); color: #fff; }
+
+/* Cartão */
+.opcoes--cartao .opcoes__item { min-height: 56px; padding: .8rem .95rem; border-radius: var(--radius-sm); align-items: flex-start; }
+.opcoes--cartao .opcoes__item--ativo { border-color: var(--primary); background: #fff7f8; box-shadow: 0 0 0 1px var(--primary); }
+.opcoes__marca {
+  flex-shrink: 0; width: 1.3rem; height: 1.3rem; margin-top: .1rem; border-radius: 99px;
+  border: 1.5px solid var(--border-strong); display: grid; place-items: center; color: transparent;
+}
+.opcoes__item--ativo .opcoes__marca { background: var(--primary); border-color: var(--primary); color: #fff; }
+.opcoes__texto { display: flex; flex-direction: column; gap: .1rem; min-width: 0; }
+.opcoes__rotulo { font-weight: 600; font-size: .95rem; line-height: 1.3; }
+.opcoes__detalhe { font-size: .84rem; color: var(--muted-foreground); line-height: 1.35; }
+.opcoes__selo {
+  margin-left: auto; flex-shrink: 0; align-self: center;
+  font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--primary-700); background: #ffe7ea; border-radius: 99px; padding: .2rem .55rem;
+}
+.opcoes[aria-invalid="true"] .opcoes__item:not(.opcoes__item--ativo) { border-color: var(--cad-erro); }

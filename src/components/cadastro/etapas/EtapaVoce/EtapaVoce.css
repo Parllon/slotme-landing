@@ -1,0 +1,23 @@
+.etapa-voce { display: flex; flex-direction: column; gap: 1.35rem; }
+.etapa-voce__intro {
+  display: flex; flex-direction: column; gap: .75rem;
+  padding: 1.1rem 1.15rem; border-radius: var(--radius); background: var(--dark); color: #fff;
+}
+.etapa-voce__selo {
+  align-self: flex-start; font-family: var(--font-heading); font-weight: 700; font-size: 1.05rem;
+  color: #fff; background: var(--primary); padding: .3rem .8rem; border-radius: 99px;
+}
+.etapa-voce__destaques { display: flex; flex-wrap: wrap; gap: .4rem 1rem; }
+.etapa-voce__destaques li { display: flex; align-items: center; gap: .35rem; font-size: .9rem; font-weight: 600; }
+.etapa-voce__destaques svg { color: var(--primary); }
+.etapa-voce__em-maos { margin: 0; font-size: .86rem; color: #c3cee0; line-height: 1.45; }
+
+.etapa-voce__sugestao {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem;
+  padding: .6rem .85rem; border-radius: var(--radius-sm); background: #fff6db; font-size: .9rem; font-weight: 600;
+}
+.etapa-voce__sugestao button {
+  font: inherit; font-size: .85rem; font-weight: 700; cursor: pointer;
+  border: 0; border-radius: 99px; padding: .35rem .8rem; background: var(--foreground); color: #fff;
+}
+.etapa-voce__aviso { margin: 0; font-size: .85rem; line-height: 1.45; padding: .55rem .8rem; border-radius: var(--radius-sm); background: var(--surface); }

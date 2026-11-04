@@ -1,0 +1,59 @@
+.cadastro {
+  --cad-erro: #c42b2b;
+  --cad-erro-fundo: #fdeeee;
+  --cad-largura: 640px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
+}
+
+/* Topo fixo com marca, contador e barra de progresso */
+.cadastro__topo { position: sticky; top: 0; z-index: 20; background: rgba(245, 247, 251, .94); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+.cadastro__topo-interno {
+  max-width: var(--cad-largura); margin-inline: auto; padding: .7rem 1rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.cadastro__logo { display: inline-flex; }
+.cadastro__logo .logo__mark { width: 30px; height: 30px; }
+.cadastro__logo .logo { font-size: 1.1rem; }
+.cadastro__contador { font-size: .85rem; font-weight: 600; color: var(--muted-foreground); white-space: nowrap; }
+.cadastro__barra { height: 4px; background: var(--surface-2); }
+.cadastro__barra span { display: block; height: 100%; background: var(--primary); border-radius: 0 99px 99px 0; transition: width .35s ease; }
+
+.cadastro__form { flex: 1; display: flex; flex-direction: column; }
+.cadastro__corpo { flex: 1; width: 100%; max-width: var(--cad-largura); margin-inline: auto; padding: 1.5rem 1rem 2rem; }
+
+.cadastro__rascunho {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem;
+  margin-bottom: 1.25rem; padding: .6rem .6rem .6rem .9rem; border-radius: var(--radius-sm); background: var(--surface); font-size: .88rem; font-weight: 600;
+}
+.cadastro__rascunho button {
+  display: inline-flex; align-items: center; gap: .3rem; min-height: 36px; padding: .3rem .75rem; cursor: pointer;
+  font: inherit; font-size: .82rem; font-weight: 700; border: 0; border-radius: 99px; background: #fff; color: var(--foreground);
+}
+
+.cadastro__eyebrow { margin: 0 0 .35rem; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--primary-600); }
+.cadastro__titulo { font-size: clamp(1.45rem, 5.2vw, 1.85rem); outline: none; }
+.cadastro__subtitulo { margin: .5rem 0 1.5rem; color: var(--muted-foreground); font-size: .97rem; line-height: 1.5; }
+.cadastro__alerta {
+  margin: -0.5rem 0 1.25rem; padding: .7rem .9rem; border-radius: var(--radius-sm);
+  background: var(--cad-erro-fundo); color: var(--cad-erro); font-weight: 600; font-size: .9rem;
+}
+
+/* Navegação presa embaixo: os botões ficam sempre ao alcance do polegar */
+.cadastro__rodape {
+  position: sticky; bottom: 0; z-index: 20;
+  background: rgba(255, 255, 255, .96); backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border); box-shadow: 0 -8px 24px rgba(28, 53, 82, .06);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.cadastro__rodape-interno { max-width: var(--cad-largura); margin-inline: auto; padding: .75rem 1rem; display: flex; gap: .65rem; }
+.cadastro__rodape .btn { min-height: 52px; }
+.cadastro__rodape .btn:hover { transform: none; }
+.cadastro__voltar { padding-inline: 1rem; }
+.cadastro__avancar { flex: 1; }
+.cadastro__rodape .btn:disabled { opacity: .65; cursor: wait; }
+.cadastro__girando { animation: cadastro-girar 1s linear infinite; }
+@keyframes cadastro-girar { to { transform: rotate(360deg); } }
