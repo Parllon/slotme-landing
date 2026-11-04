@@ -29,7 +29,7 @@ export function Header() {
         </nav>
 
         <div className="header__cta">
-          <Button href={waUrl} target="_blank" rel="noopener noreferrer" variant="outline" onClick={() => trackLpEvent("lp_clicou_whatsapp")}>
+          <Button href={waUrl} target="_blank" rel="noopener noreferrer" variant="whatsapp" onClick={() => trackLpEvent("lp_clicou_whatsapp")}>
             Fale comigo
             <MessageCircle size={18} />
           </Button>
@@ -50,7 +50,7 @@ export function Header() {
           {navLinks.map((l) => (
             <a key={l.href} href={l.href} className="header__link" onClick={() => setOpen(false)}>{l.label}</a>
           ))}
-          <Button href={waUrl} target="_blank" rel="noopener noreferrer" block onClick={() => trackLpEvent("lp_clicou_whatsapp")}>
+          <Button href={waUrl} target="_blank" rel="noopener noreferrer" variant="whatsapp" block onClick={() => trackLpEvent("lp_clicou_whatsapp")}>
             Fale comigo no WhatsApp
           </Button>
         </nav>

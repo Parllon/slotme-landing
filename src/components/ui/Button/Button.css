@@ -10,4 +10,6 @@
 .btn--primary:hover { opacity: .88; }
 .btn--outline { background: transparent; color: var(--foreground); border-color: var(--border-strong); }
 .btn--outline:hover { border-color: var(--foreground); }
+.btn--whatsapp { background: #25d366; color: #fff; box-shadow: 0 10px 24px -10px rgba(37, 211, 102, .6); }
+.btn--whatsapp:hover { background: #1fbe5b; }
 .btn--block { width: 100%; }
