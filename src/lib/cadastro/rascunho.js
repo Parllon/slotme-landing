@@ -12,10 +12,14 @@ export function lerRascunho() {
     if (!bruto || bruto.estado?.versao !== VERSAO_ESTADO) return null;
     if (Date.now() - bruto.salvoEm > VALIDADE_DIAS * 86400000) return null;
     const e = bruto.estado;
+    const inicial = estadoInicial();
     return {
       ...e,
       // Rascunhos de antes da pausa por profissional não têm modo/porPessoa.
-      horarios: { ...e.horarios, pausa: { ...estadoInicial().horarios.pausa, ...e.horarios.pausa } },
+      horarios: { ...e.horarios, pausa: { ...inicial.horarios.pausa, ...e.horarios.pausa } },
+      // Rascunhos de antes da "Minha cor"/perfil/avisos não têm esses campos.
+      visual: { ...inicial.visual, ...e.visual, cor: { ...inicial.visual.cor, ...(e.visual || {}).cor } },
+      avisos: { ...inicial.avisos, ...e.avisos },
       // Aceites nunca vêm pré-marcados de um rascunho antigo.
       revisao: { ...e.revisao, aceiteTeste: false, aceiteLgpd: false, botcheck: false },
     };

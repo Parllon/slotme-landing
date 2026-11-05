@@ -2,7 +2,7 @@ import { useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { ArrowRight, ChevronLeft, Loader2, RotateCcw } from "lucide-react";
 import { Logo } from "../../ui/Logo/Logo";
 import { etapas, navTextos as N, rascunhoTextos } from "../../../data/cadastro";
-import { estadoInicial, reducer } from "../../../lib/cadastro/estado";
+import { estadoInicial, listarPessoas, reducer } from "../../../lib/cadastro/estado";
 import { primeiraEtapaComErro, validarEtapa } from "../../../lib/cadastro/validacao";
 import { apagarRascunho, lerRascunho, rascunhoTemConteudo, salvarRascunho } from "../../../lib/cadastro/rascunho";
 import { gerarProtocolo } from "../../../lib/cadastro/formatos";
@@ -47,6 +47,7 @@ export function Cadastro() {
   const titulo = useRef(null);
   const primeiraRender = useRef(true);
   const etapasVistas = useRef(new Set());
+  const protocoloRef = useRef(null);
 
   const etapa = etapas[estado.etapa] || etapas[0];
   const Componente = COMPONENTES[etapa.id];
@@ -92,22 +93,26 @@ export function Cadastro() {
       focarPrimeiroErro();
       return;
     }
-    const protocolo = gerarProtocolo();
-    const resumoSucesso = { protocolo, nome: estado.voce.nome, email: estado.voce.email, negocio: estado.negocio.nome };
+    // Mesmo protocolo em todas as tentativas: se a resposta se perdeu mas o
+    // servidor recebeu, o reenvio devolve o mesmo cadastro em vez de duplicar.
+    if (!protocoloRef.current) protocoloRef.current = gerarProtocolo();
+    const protocolo = protocoloRef.current;
+    const fotos = listarPessoas(estado).filter((p) => p.foto).map((p) => ({ nome: p.nome, foto: p.foto }));
+    const resumoSucesso = { protocolo, nome: estado.voce.nome, email: estado.voce.email, negocio: estado.negocio.nome, fotos };
     // Robô marcou a armadilha: finge que deu certo e não envia nada.
     if (estado.revisao.botcheck) { setEnvio({ status: "ok", ...resumoSucesso }); return; }
 
     setEnvio({ status: "enviando" });
     try {
       const pedido = montarPedido(estado, { protocolo, utm: lerOrigem() });
-      await enviarPedido(pedido, { botcheck: false });
+      const sistema = await enviarPedido(pedido, { botcheck: false });
       trackLpEvent("cad_enviado");
       apagarRascunho();
-      setEnvio({ status: "ok", ...resumoSucesso });
+      setEnvio({ status: "ok", ...resumoSucesso, pagina: sistema });
     } catch (e) {
       console.error("[cadastro] falha no envio:", e);
       trackLpEvent("cad_erro_envio");
-      setEnvio({ status: "erro" });
+      setEnvio({ status: "erro", codigo: e.codigo || "rede" });
     }
   };
 
@@ -119,6 +124,7 @@ export function Cadastro() {
 
   const recomecar = () => {
     apagarRascunho();
+    protocoloRef.current = null;
     dispatch({ tipo: "reiniciar" });
     setTentou({});
     setAvisoRascunho(false);
@@ -167,7 +173,7 @@ export function Cadastro() {
 
           <Componente
             estado={estado} dispatch={dispatch} erros={errosVisiveis}
-            irPara={irPara} indice={INDICE} erroEnvio={envio.status === "erro"}
+            irPara={irPara} indice={INDICE} erroEnvio={envio.status === "erro" ? envio.codigo : null}
           />
         </main>
 

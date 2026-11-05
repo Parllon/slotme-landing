@@ -88,7 +88,19 @@ export function normalizarInstagram(v) {
 }
 
 /* ---- Sugestão de correção de e-mail (gmial.com -> gmail.com) ---- */
-const DOMINIOS = ["gmail.com", "hotmail.com", "outlook.com", "yahoo.com.br", "yahoo.com", "icloud.com", "live.com", "bol.com.br", "uol.com.br"];
+// Só aceitamos Gmail (agenda Google por convite) e iCloud (agenda por assinatura
+// no iPhone). Mesma lista do painel (painel/lib/pedido.js → DOMINIOS_EMAIL).
+const DOMINIOS_GMAIL = ["gmail.com"];
+const DOMINIOS_ICLOUD = ["icloud.com", "me.com", "mac.com"];
+const DOMINIOS = [...DOMINIOS_GMAIL, ...DOMINIOS_ICLOUD];
+
+/** "gmail" | "icloud" | null (outro provedor ou e-mail incompleto). */
+export function tipoEmail(email) {
+  const dominio = String(email || "").trim().toLowerCase().split("@")[1];
+  if (DOMINIOS_GMAIL.includes(dominio)) return "gmail";
+  if (DOMINIOS_ICLOUD.includes(dominio)) return "icloud";
+  return null;
+}
 
 function distancia(a, b) {
   const dp = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
@@ -118,5 +130,5 @@ export function sugestaoEmail(email) {
 }
 
 export function ehGmail(email) {
-  return /@(gmail|googlemail)\.com$/i.test(String(email || "").trim());
+  return tipoEmail(email) === "gmail";
 }

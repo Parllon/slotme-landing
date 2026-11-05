@@ -1,17 +1,20 @@
 // pedido.js — transforma o estado da tela no "pedido" que sai do site.
 //
-// CONTRATO (versão 1): este é o formato que o sistema de agendamento vai
-// receber quando a integração existir. Mudou algo aqui? Suba a "versao".
-// paraDadosJson() mostra como o pedido vira o dados.json + .env do painel
-// (mesmos nomes de campo de clientes/_template), para facilitar a integração.
-import { cadastroConfig, diasSemana, especialidades, origens, planos, temas } from "../../data/cadastro";
+// CONTRATO: é o formato que o painel do Agendamento recebe em POST /api/pedidos
+// (Agenda_de_Servicos/painel/lib/pedido.js valida e converte DE NOVO no servidor).
+// Mudou algo aqui? Suba a "versao" e atualize o painel junto.
+//   v1 — original
+//   v2 — visual.tema "custom" + visual.tema_custom, perfil escolhido, avisos_whatsapp
+// paraDadosJson() mostra como o pedido vira o dados.json + .env (mesmos nomes de
+// campo de clientes/_template) — usado no e-mail de cópia.
+import { cadastroConfig, diasSemana, especialidades, origens, perfis, planos, temas } from "../../data/cadastro";
 import { horaParaMinutos, normalizarInstagram, precoParaNumero, slugify } from "./formatos";
 import { pausaDaPessoa, pausaIndividual } from "./estado";
 
-export const VERSAO_PEDIDO = 1;
+export const VERSAO_PEDIDO = 2;
 
 export function montarPedido(estado, { protocolo, utm }) {
-  const { voce, negocio, servicos, equipe, horarios, visual, revisao } = estado;
+  const { voce, negocio, servicos, equipe, horarios, visual, avisos, revisao } = estado;
   const esp = especialidades.find((e) => e.valor === negocio.especialidade);
   const nomeServico = Object.fromEntries(servicos.map((s) => [s.id, s.nome.trim()]));
   const todosNomes = servicos.map((s) => s.nome.trim());
@@ -84,10 +87,18 @@ export function montarPedido(estado, { protocolo, utm }) {
       pausa_por_profissional: individual,
     },
     visual: {
-      tema: visual.tema || "auto",
+      tema: visual.tema || "auto", // "auto" | "tema_1".."tema_8" | "custom"
+      tema_custom: visual.tema === "custom"
+        ? { cor_primaria: visual.cor.primaria.toUpperCase(), cor_destaque: (visual.cor.destaque || "").toUpperCase(), modo: visual.cor.modo }
+        : null,
       tema_sugerido: esp ? esp.tema : "tema_8",
-      perfil: esp ? esp.perfil : "profissional",
+      perfil: visual.perfil || (esp ? esp.perfil : "profissional"),
       plano_interesse: visual.plano,
+    },
+    // Avisos de agendamento para o dono (negocio.whatsapp_aviso no sistema).
+    avisos_whatsapp: {
+      ativo: Boolean(avisos.ativo),
+      numero: avisos.ativo ? `55${avisos.outro ? avisos.numero : voce.whatsapp}` : null,
     },
     observacoes: revisao.observacoes.trim() || null,
     consentimentos: {
@@ -128,7 +139,10 @@ export function paraDadosJson(pedido) {
         cidade: pedido.negocio.cidade,
         rede_social: pedido.negocio.instagram || "",
         telefone: pedido.contato.whatsapp,
+        whatsapp_contato: pedido.contato.whatsapp,
+        whatsapp_aviso: pedido.avisos_whatsapp?.ativo ? pedido.avisos_whatsapp.numero : "",
         email_dono: pedido.contato.email_google,
+        tema_custom: pedido.visual.tema_custom || { cor_primaria: "", cor_destaque: "", modo: "claro" },
       },
       profissionais: pedido.profissionais.map((p, i) => ({
         id: i + 1,
@@ -153,6 +167,7 @@ export function paraDadosJson(pedido) {
 export function resumoTexto(pedido) {
   const rot = (lista, v) => (lista.find((x) => x.valor === v) || {}).rotulo || v;
   const tema = temas.find((t) => t.id === pedido.visual.tema);
+  const tc = pedido.visual.tema_custom;
   const nomeDia = Object.fromEntries(diasSemana.map((d) => [d.dia, d.nome]));
   const linhas = [
     `PROTOCOLO: ${pedido.protocolo}`,
@@ -181,7 +196,9 @@ export function resumoTexto(pedido) {
     `Pausa: ${pedido.horarios.pausa_por_profissional ? "cada profissional tem a sua (ver EQUIPE)" : pedido.horarios.pausa ? `${pedido.horarios.pausa.inicio}–${pedido.horarios.pausa.fim} (todos)` : "não"}`,
     "",
     "== VISUAL ==",
-    `Tema: ${tema ? `${tema.nome} (${tema.id})` : `escolher por mim (sugerido ${pedido.visual.tema_sugerido})`}`,
+    `Tema: ${tema ? `${tema.nome} (${tema.id})` : tc ? `MINHA COR ${tc.cor_primaria} · fundo ${tc.modo} · detalhe ${tc.cor_destaque || "dourado padrão"}` : `escolher por mim (sugerido ${pedido.visual.tema_sugerido})`}`,
+    `Quem atende: ${rot(perfis, pedido.visual.perfil)}`,
+    `Avisos no WhatsApp: ${pedido.avisos_whatsapp?.ativo ? pedido.avisos_whatsapp.numero : "não quer"}`,
     `Plano de interesse: ${rot(planos, pedido.visual.plano_interesse)}`,
     "",
     `Observações: ${pedido.observacoes || "—"}`,

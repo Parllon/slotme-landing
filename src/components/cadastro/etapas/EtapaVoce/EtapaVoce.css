@@ -21,3 +21,15 @@
   border: 0; border-radius: 99px; padding: .35rem .8rem; background: var(--foreground); color: #fff;
 }
 .etapa-voce__aviso { margin: 0; font-size: .85rem; line-height: 1.45; padding: .55rem .8rem; border-radius: var(--radius-sm); background: var(--surface); }
+
+.etapa-voce__avisos {
+  display: flex; flex-direction: column; gap: .75rem; padding: .9rem 1rem;
+  border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--border);
+}
+
+.etapa-voce__icloud {
+  display: flex; gap: .65rem; align-items: flex-start; margin-top: .6rem; padding: .75rem .9rem;
+  border-radius: var(--radius-sm); background: #eef6ff; border: 1px solid #b9d7f7; color: #133a63;
+}
+.etapa-voce__icloud svg { flex-shrink: 0; margin-top: .1rem; }
+.etapa-voce__icloud p { margin: 0; font-size: .9rem; line-height: 1.5; }

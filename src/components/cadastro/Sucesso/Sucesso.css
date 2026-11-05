@@ -14,3 +14,44 @@
 }
 .sucesso .btn { margin-top: .5rem; }
 .sucesso__voltar { font-weight: 600; color: var(--muted-foreground); text-decoration: underline; padding: .5rem; }
+
+/* Página sendo criada (integração automática) */
+.sucesso__pagina {
+  width: 100%; display: flex; flex-direction: column; align-items: center; gap: .45rem;
+  padding: 1rem; border-radius: var(--radius-sm); background: #fff; border: 1.5px solid var(--border-strong);
+}
+.sucesso__pagina--pronto { border-color: #1f9d55; }
+.sucesso__pagina--erro, .sucesso__pagina--demorando { border-color: #d08a00; }
+.sucesso__pagina-titulo { margin: 0; font-size: .85rem; color: var(--muted-foreground); }
+.sucesso__pagina-url { font-size: 1.05rem; word-break: break-all; }
+.sucesso__pagina-estado { display: flex; align-items: center; gap: .45rem; margin: 0; font-size: .92rem; line-height: 1.45; }
+.sucesso__pagina-estado svg { flex-shrink: 0; }
+.sucesso__pagina--pronto .sucesso__pagina-estado { color: #1f7a45; font-weight: 600; }
+.sucesso__pagina--erro .sucesso__pagina-estado, .sucesso__pagina--demorando .sucesso__pagina-estado { color: #7a4b00; }
+.sucesso__girando { animation: sucesso-girar 1s linear infinite; }
+@keyframes sucesso-girar { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .sucesso__girando { animation: none; } }
+.sucesso .sucesso__acao { display: inline-flex; margin-top: .6rem; width: auto; font-size: .88rem; padding: .55rem .9rem; }
+
+.sucesso__fotos { width: 100%; text-align: left; }
+.sucesso__fotos ul { list-style: none; margin: .5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .75rem; }
+.sucesso__fotos li { display: flex; align-items: center; gap: .5rem; font-size: .9rem; }
+.sucesso__fotos img { width: 3.5rem; height: 3.5rem; border-radius: 99px; object-fit: cover; }
+
+/* Passo obrigatório da agenda (Gmail ou iPhone) — o mais esquecido, em destaque */
+.sucesso__obrigatorio {
+  position: relative; width: 100%; text-align: left; display: flex; flex-direction: column; gap: .6rem;
+  padding: 1.4rem 1.1rem 1.1rem; border-radius: var(--radius-sm); background: #fff6db; border: 2px solid #e0a800;
+}
+.sucesso__selo {
+  position: absolute; top: -.7rem; left: 1rem; padding: .2rem .6rem; border-radius: 99px;
+  font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: #fff; background: #c27c00;
+}
+.sucesso .sucesso__obrigatorio h2 { display: flex; align-items: center; gap: .5rem; margin: 0; font-size: 1.15rem; align-self: auto; }
+.sucesso__obrigatorio p { margin: 0; line-height: 1.5; font-size: .95rem; }
+.sucesso__obrigatorio ol { margin: 0; padding-left: 1.25rem; line-height: 1.6; font-size: .95rem; }
+.sucesso__obrigatorio ol li::marker { font-weight: 800; }
+.sucesso__obrigatorio small { color: #6b5a2a; font-size: .82rem; line-height: 1.45; }
+.sucesso__obrigatorio .btn { margin-top: .25rem; }
+.sucesso__aguardando { display: flex; gap: .45rem; align-items: flex-start; color: #6b5a2a; font-size: .88rem !important; }
+.sucesso__aguardando svg { flex-shrink: 0; margin-top: .15rem; }

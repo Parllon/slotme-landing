@@ -1,23 +1,26 @@
-import { Check } from "lucide-react";
+import { Check, Smartphone } from "lucide-react";
 import { intro, origens, voceTextos as T } from "../../../../data/cadastro";
-import { apenasDigitos, ehGmail, emailValido, mascaraTelefone, sugestaoEmail } from "../../../../lib/cadastro/formatos";
+import { apenasDigitos, mascaraTelefone, sugestaoEmail, tipoEmail } from "../../../../lib/cadastro/formatos";
 import { Campo, ariaCampo } from "../../ui/Campo/Campo";
 import { Opcoes } from "../../ui/Opcoes/Opcoes";
+import { Alternador } from "../../ui/Alternador/Alternador";
 import "./EtapaVoce.css";
 
-export function EtapaVoce({ estado, dispatch, erros }) {
-  const { voce } = estado;
-  const set = (campo) => (valor) => dispatch({ tipo: "campo", secao: "voce", campo, valor });
+// Colou "+55 21 9..."? Tira o 55 do país.
+function soCelular(texto) {
+  let d = apenasDigitos(texto);
+  if (d.length > 11 && d.startsWith("55")) d = d.slice(2);
+  return d.slice(0, 11);
+}
 
-  // Colou "+55 21 9..."? Tira o 55 do país.
-  const mudarWhats = (texto) => {
-    let d = apenasDigitos(texto);
-    if (d.length > 11 && d.startsWith("55")) d = d.slice(2);
-    set("whatsapp")(d.slice(0, 11));
-  };
+export function EtapaVoce({ estado, dispatch, erros }) {
+  const { voce, avisos } = estado;
+  const set = (campo) => (valor) => dispatch({ tipo: "campo", secao: "voce", campo, valor });
+  const setAviso = (campo) => (valor) => dispatch({ tipo: "campo", secao: "avisos", campo, valor });
+  const mudarWhats = (texto) => set("whatsapp")(soCelular(texto));
 
   const sugestao = sugestaoEmail(voce.email);
-  const avisoNaoGmail = !sugestao && emailValido(voce.email) && !ehGmail(voce.email);
+  const icloud = !sugestao && tipoEmail(voce.email) === "icloud";
 
   return (
     <div className="etapa-voce">
@@ -49,6 +52,23 @@ export function EtapaVoce({ estado, dispatch, erros }) {
         />
       </Campo>
 
+      <div className="etapa-voce__avisos">
+        <Alternador id="avisos-ativo" label={T.avisos.label} hint={T.avisos.hint} checked={avisos.ativo} onChange={setAviso("ativo")} />
+        {avisos.ativo && (
+          <Alternador id="avisos-outro" compacto label={T.avisos.outro} checked={avisos.outro} onChange={setAviso("outro")} />
+        )}
+        {avisos.ativo && avisos.outro && (
+          <Campo id="avisos-numero" label={T.avisos.numeroLabel} hint={T.avisos.numeroHint} erro={erros["avisos.numero"]}>
+            <input
+              className="cad-input" type="tel" inputMode="numeric" autoComplete="off"
+              placeholder={T.whatsapp.placeholder} value={mascaraTelefone(avisos.numero)}
+              onChange={(e) => setAviso("numero")(soCelular(e.target.value))}
+              {...ariaCampo("avisos-numero", erros["avisos.numero"], T.avisos.numeroHint)}
+            />
+          </Campo>
+        )}
+      </div>
+
       <Campo id="voce-email" label={T.email.label} hint={T.email.hint} erro={erros["voce.email"]}>
         <input
           className="cad-input" type="email" inputMode="email" autoComplete="email" autoCapitalize="none" spellCheck={false}
@@ -62,7 +82,12 @@ export function EtapaVoce({ estado, dispatch, erros }) {
             <button type="button" onClick={() => { set("email")(sugestao); set("emailConfirma")(""); }}>{T.emailSugestaoBotao}</button>
           </div>
         )}
-        {avisoNaoGmail && <p className="etapa-voce__aviso">{T.emailNaoGmail}</p>}
+        {icloud && (
+          <div className="etapa-voce__icloud" role="status">
+            <Smartphone size={20} aria-hidden="true" />
+            <p><strong>{T.emailIcloud.titulo}</strong> {T.emailIcloud.texto}</p>
+          </div>
+        )}
       </Campo>
 
       <Campo id="voce-email2" label={T.emailConfirma.label} erro={erros["voce.emailConfirma"]}>

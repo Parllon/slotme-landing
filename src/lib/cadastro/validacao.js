@@ -1,23 +1,37 @@
 // validacao.js — regras de cada etapa. Funções puras: recebem o estado e
 // devolvem { chaveDoCampo: "mensagem" }. Objeto vazio = etapa válida.
 import { erros } from "../../data/cadastro";
-import { celularValido, emailValido, horaParaMinutos, precoParaNumero } from "./formatos";
+import { celularValido, emailValido, horaParaMinutos, precoParaNumero, tipoEmail } from "./formatos";
 import { listarPessoas, pausaDaPessoa, pausaIndividual } from "./estado";
+import { HEX_COR } from "./temaCustom";
 
 const vazio = (v) => !String(v ?? "").trim();
 
-function validarVoce({ voce }) {
+function validarVoce({ voce, avisos }) {
   const e = {};
   if (vazio(voce.nome)) e["voce.nome"] = erros.obrigatorio;
   else if (voce.nome.trim().length < 2) e["voce.nome"] = erros.nomeCurto;
   if (!celularValido(voce.whatsapp)) e["voce.whatsapp"] = vazio(voce.whatsapp) ? erros.obrigatorio : erros.whatsapp;
   if (vazio(voce.email)) e["voce.email"] = erros.obrigatorio;
   else if (!emailValido(voce.email)) e["voce.email"] = erros.email;
+  else if (!tipoEmail(voce.email)) e["voce.email"] = erros.emailProvedor;
   if (!e["voce.email"] && voce.email.trim().toLowerCase() !== voce.emailConfirma.trim().toLowerCase()) {
     e["voce.emailConfirma"] = vazio(voce.emailConfirma) ? erros.obrigatorio : erros.emailConfirma;
   }
   if (!voce.origem) e["voce.origem"] = erros.origem;
   if (voce.origem === "outro" && vazio(voce.origemOutro)) e["voce.origemOutro"] = erros.obrigatorio;
+  if (avisos.ativo && avisos.outro && !celularValido(avisos.numero)) {
+    e["avisos.numero"] = vazio(avisos.numero) ? erros.obrigatorio : erros.whatsapp;
+  }
+  return e;
+}
+
+function validarVisual({ visual }) {
+  const e = {};
+  if (visual.tema === "custom") {
+    if (!HEX_COR.test(visual.cor.primaria || "")) e["visual.cor.primaria"] = erros.cor;
+    if (visual.cor.destaque && !HEX_COR.test(visual.cor.destaque)) e["visual.cor.destaque"] = erros.cor;
+  }
   return e;
 }
 
@@ -53,6 +67,7 @@ function validarEquipe({ equipe }) {
   for (const p of equipe.profissionais) {
     if (vazio(p.nome)) e[`prof.${p.id}.nome`] = erros.obrigatorio;
     if (!vazio(p.email) && !emailValido(p.email)) e[`prof.${p.id}.email`] = erros.email;
+    else if (!vazio(p.email) && !tipoEmail(p.email)) e[`prof.${p.id}.email`] = erros.emailProvedor;
     if (!p.todos && !p.servicos.length) e[`prof.${p.id}.servicos`] = erros.servicosDoProfissional;
     if (p.horarioDiferente && vazio(p.horarioObs)) e[`prof.${p.id}.horarioObs`] = erros.horarioObs;
   }
@@ -94,7 +109,7 @@ const porEtapa = {
   servicos: validarServicos,
   equipe: validarEquipe,
   horarios: validarHorarios,
-  visual: () => ({}),
+  visual: validarVisual,
   revisao: validarRevisao,
 };
 

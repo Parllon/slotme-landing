@@ -1,9 +1,9 @@
-import { Mail, MessageCircle, Pencil } from "lucide-react";
+import { AlertTriangle, Mail, MessageCircle, Pencil, Smartphone } from "lucide-react";
 import { whatsapp } from "../../../../data/content";
 import {
-  cadastroConfig, diasSemana, especialidades, origens, planos, revisaoTextos as T, temas, visualTextos,
+  cadastroConfig, diasSemana, especialidades, origens, perfis, planos, revisaoTextos as T, temas, visualTextos,
 } from "../../../../data/cadastro";
-import { formatarDuracao, formatarPreco, mascaraTelefone, normalizarInstagram, precoParaNumero, slugify } from "../../../../lib/cadastro/formatos";
+import { formatarDuracao, formatarPreco, mascaraTelefone, normalizarInstagram, precoParaNumero, slugify, tipoEmail } from "../../../../lib/cadastro/formatos";
 import { Campo } from "../../ui/Campo/Campo";
 import { listarPessoas, pausaDaPessoa, pausaIndividual } from "../../../../lib/cadastro/estado";
 import { Caixa } from "../../ui/Alternador/Alternador";
@@ -29,8 +29,16 @@ function Linha({ rotulo, children }) {
   return <div className="revisao__linha"><dt>{rotulo}</dt><dd>{children || "—"}</dd></div>;
 }
 
+function Cor({ hex }) {
+  return <span className="revisao__cor"><span style={{ background: hex }} aria-hidden="true" />{hex.toUpperCase()}</span>;
+}
+
 export function EtapaRevisao({ estado, dispatch, erros, irPara, indice, erroEnvio }) {
-  const { voce, negocio, servicos, equipe, horarios, visual, revisao } = estado;
+  const { voce, negocio, servicos, equipe, horarios, visual, avisos, revisao } = estado;
+  const esp = especialidades.find((e) => e.valor === negocio.especialidade);
+  const perfil = visual.perfil || (esp ? esp.perfil : "profissional");
+  const custom = visual.tema === "custom";
+  const C = visualTextos.custom;
   const R = T.rotulos;
   const set = (campo) => (valor) => dispatch({ tipo: "campo", secao: "revisao", campo, valor });
   const tema = temas.find((t) => t.id === visual.tema);
@@ -38,18 +46,31 @@ export function EtapaRevisao({ estado, dispatch, erros, irPara, indice, erroEnvi
   const servicosDe = (p) => (p.todos ? R.todos : p.servicos.map((id) => nomeServico[id]).join(", "));
   const pessoas = listarPessoas(estado);
   const individual = pausaIndividual(estado);
+  const icloud = tipoEmail(voce.email) === "icloud";
   const linkWhats = `https://wa.me/${whatsapp.phone}?text=${encodeURIComponent(`Oi! Tive um problema para enviar o cadastro do teste grátis (${negocio.nome}).`)}`;
 
   return (
     <div className="revisao">
-      <div className="revisao__convite">
-        <Mail size={22} aria-hidden="true" />
-        <div>
-          <p>{T.convite.titulo}</p>
-          <strong>{voce.email}</strong>
-          <small>{T.convite.texto}</small>
+      {icloud ? (
+        <div className="revisao__convite">
+          <Smartphone size={22} aria-hidden="true" />
+          <div>
+            <p>{T.conviteIcloud.titulo}</p>
+            <small>{T.conviteIcloud.texto}</small>
+            <strong>{voce.email}</strong>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="revisao__convite">
+          <Mail size={22} aria-hidden="true" />
+          <div>
+            <p>{T.convite.titulo}</p>
+            <strong>{voce.email}</strong>
+            <small>{T.convite.texto}</small>
+            <p className="revisao__obrigatorio"><AlertTriangle size={16} aria-hidden="true" />{T.convite.obrigatorio}</p>
+          </div>
+        </div>
+      )}
 
       <Secao titulo={T.secoes.voce} etapa={indice.voce} irPara={irPara}>
         <dl>
@@ -57,6 +78,7 @@ export function EtapaRevisao({ estado, dispatch, erros, irPara, indice, erroEnvi
           <Linha rotulo={R.whatsapp}>{mascaraTelefone(voce.whatsapp)}</Linha>
           <Linha rotulo={R.email}>{voce.email}</Linha>
           <Linha rotulo={R.origem}>{voce.origem === "outro" ? voce.origemOutro : rotuloDe(origens, voce.origem)}</Linha>
+          <Linha rotulo={R.avisos}>{avisos.ativo ? mascaraTelefone(avisos.outro ? avisos.numero : voce.whatsapp) : R.avisosDesligado}</Linha>
         </dl>
       </Secao>
 
@@ -110,7 +132,11 @@ export function EtapaRevisao({ estado, dispatch, erros, irPara, indice, erroEnvi
 
       <Secao titulo={T.secoes.visual} etapa={indice.visual} irPara={irPara}>
         <dl>
-          <Linha rotulo={R.tema}>{tema ? tema.nome : visualTextos.automatico.rotulo}</Linha>
+          <Linha rotulo={R.tema}>{tema ? tema.nome : custom ? C.rotulo : visualTextos.automatico.rotulo}</Linha>
+          {custom && <Linha rotulo={R.cor}><Cor hex={visual.cor.primaria} /></Linha>}
+          {custom && <Linha rotulo={R.fundo}>{rotuloDe(C.fundoOpcoes, visual.cor.modo)}</Linha>}
+          {custom && <Linha rotulo={R.detalhe}>{visual.cor.destaque ? <Cor hex={visual.cor.destaque} /> : R.detalhePadrao}</Linha>}
+          <Linha rotulo={R.perfil}>{rotuloDe(perfis, perfil)}</Linha>
           <Linha rotulo={R.plano}>{rotuloDe(planos, visual.plano)}</Linha>
         </dl>
       </Secao>
@@ -142,7 +168,7 @@ export function EtapaRevisao({ estado, dispatch, erros, irPara, indice, erroEnvi
 
       {erroEnvio && (
         <div className="revisao__erro-envio" role="alert">
-          <p>{T.erroEnvio}</p>
+          <p>{erroEnvio === "duplicado" ? T.erroDuplicado : T.erroEnvio}</p>
           <a href={linkWhats} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} aria-hidden="true" />{T.whatsappErro}</a>
         </div>
       )}

@@ -12,8 +12,12 @@ export const cadastroConfig = {
   politicaUrl: "/privacidade/",
   // Versão do texto do termo do teste — vai junto no pedido, para saber qual
   // versão a pessoa aceitou se o texto mudar no futuro.
-  versaoTermo: "2026-11",
+  versaoTermo: "2026-11-2",
   dominioPaginas: "agendamentos.app.br",
+  // Número CENTRAL do SlotMe (WAHA, sessão "agendamento"), que envia as mensagens
+  // de todos os salões. Pela regra da Meta (erro 463) ele só consegue mandar para
+  // quem já mandou mensagem antes — por isso a tela final pede um "oi" para ele.
+  whatsappCentral: "5521994985733",
   maxServicos: 30,
   maxProfissionais: 10,
 };
@@ -57,14 +61,25 @@ export const voceTextos = {
   nome: { label: "Seu nome", placeholder: "Como você gosta de ser chamada(o)" },
   whatsapp: { label: "Seu WhatsApp", placeholder: "(21) 98888-7777", hint: "Vou te mandar o link da sua página por aqui." },
   email: {
-    label: "Seu e-mail do Google",
+    label: "Seu e-mail do Gmail ou do iCloud",
     placeholder: "voce@gmail.com",
-    hint: "Use o e-mail da conta Google do seu celular. A sua agenda vai aparecer nele.",
+    hint: "Só aceitamos Gmail (@gmail.com) ou iCloud (@icloud.com). É por ele que a sua agenda chega no celular.",
+  },
+  // Caixa que aparece quando o e-mail é do iCloud (iPhone).
+  emailIcloud: {
+    titulo: "Usa iPhone? Tudo certo!",
+    texto: "Seus agendamentos vão aparecer direto no Calendário do iPhone, sem precisar de conta Google. No fim do cadastro eu te mostro como ativar — leva 10 segundos.",
   },
   emailConfirma: { label: "Repita o e-mail", placeholder: "Só pra evitar erro de digitação" },
+  avisos: {
+    label: "Receber avisos no WhatsApp",
+    hint: "A cada novo agendamento, cancelamento ou remarcação, chega uma mensagem pra você.",
+    outro: "Mandar os avisos para outro número",
+    numeroLabel: "WhatsApp que recebe os avisos",
+    numeroHint: "Ex.: o celular da recepção.",
+  },
   emailSugestao: (sugestao) => `Você quis dizer ${sugestao}?`,
   emailSugestaoBotao: "Sim, corrigir",
-  emailNaoGmail: "Confirme que esse e-mail tem conta Google: é nele que o convite da agenda vai chegar.",
   origem: { label: "Como você conheceu o SlotMe?", outroPlaceholder: "Conta pra gente" },
 };
 
@@ -165,9 +180,9 @@ export const equipeTextos = {
   voceMarcador: "Você",
   nome: { label: "Nome", placeholder: "ex.: Ana Souza" },
   email: {
-    label: "E-mail do Google (opcional)",
+    label: "E-mail do Gmail ou iCloud (opcional)",
     placeholder: "ana@gmail.com",
-    hint: "Se preencher, a pessoa também recebe a própria agenda no celular dela.",
+    hint: "Se for Gmail, a pessoa recebe a própria agenda no celular dela. Se for iCloud, você manda o link da agenda pelo WhatsApp.",
   },
   todosServicos: "Faz todos os serviços",
   quaisServicos: "Quais serviços essa pessoa faz?",
@@ -237,7 +252,40 @@ export const visualTextos = {
   previewNegocio: "Seu negócio",
   planoTitulo: "Depois do teste, qual plano te interessa?",
   planoHint: "Não é compromisso: no fim dos 30 dias você decide se continua.",
+  custom: {
+    rotulo: "Minha cor",
+    descricao: "Use a cor do seu salão",
+    titulo: "Sua cor",
+    principal: "Cor principal",
+    principalHint: "Aparece no nome do salão, nos botões e nos destaques.",
+    sugestoes: "Sugestões",
+    detalhe: "Cor de detalhe (opcional)",
+    detalheHint: "Pequenos enfeites. Se não escolher, uso um dourado.",
+    detalheUsar: "Escolher cor de detalhe",
+    detalheLimpar: "Usar o dourado padrão",
+    fundo: "Fundo da página",
+    fundoOpcoes: [
+      { valor: "claro", rotulo: "Claro" },
+      { valor: "escuro", rotulo: "Escuro" },
+    ],
+    contraste: "Essa cor fica difícil de ler nesse fundo. Tente uma mais escura (fundo claro) ou mais clara (fundo escuro).",
+  },
+  coresSugeridas: ["#5C2330", "#C83462", "#94663E", "#266E59", "#1F4E79", "#6B3FA0", "#D22D2D", "#18181B"],
+  perfilTitulo: "Como chamar quem atende?",
+  perfilHint: "Aparece na página: “Escolha o(a) profissional”, “Escolha o barbeiro”…",
+  perfilAuto: "Automático",
 };
+
+// Mesmos perfis do sistema (PERFIL_PROFISSIONAL em app/temas.js).
+export const perfis = [
+  { valor: "profissional", rotulo: "Profissional" },
+  { valor: "barbeiro", rotulo: "Barbeiro" },
+  { valor: "cabeleireiro", rotulo: "Cabeleireiro(a)" },
+  { valor: "designer", rotulo: "Designer" },
+  { valor: "terapeuta", rotulo: "Terapeuta" },
+  { valor: "tatuador", rotulo: "Tatuador(a)" },
+  { valor: "especialista", rotulo: "Especialista" },
+];
 
 export const temas = [
   { id: "tema_1", nome: "Feminino clássico", vibe: "Vinho e marfim", fundo: "#fbf6f0", primaria: "#5c2330", cartao: "#ffffff", texto2: "#c98a8e", borda: "#e6b9bc", serifa: true },
@@ -262,6 +310,12 @@ export const revisaoTextos = {
   convite: {
     titulo: "O convite da sua agenda vai para:",
     texto: "Confira se está certo. Se o e-mail estiver errado, a agenda não chega até você.",
+    // Gmail: aceitar o convite é obrigatório (sem isso a agenda não aparece).
+    obrigatorio: "Depois de enviar, você PRECISA abrir esse e-mail no Gmail e tocar em “Adicionar esta agenda”. Sem isso os agendamentos não aparecem no seu celular.",
+  },
+  conviteIcloud: {
+    titulo: "Seus agendamentos vão para o Calendário do iPhone",
+    texto: "Depois de enviar, eu te mostro o botão para ativar. Seu e-mail de cadastro:",
   },
   secoes: { voce: "Você", negocio: "Negócio", servicos: "Serviços", equipe: "Equipe", horarios: "Horários", visual: "Visual" },
   rotulos: {
@@ -269,12 +323,15 @@ export const revisaoTextos = {
     negocio: "Negócio", especialidade: "Especialidade", local: "Local", instagram: "Instagram", link: "Link sugerido",
     tema: "Estilo", plano: "Plano de interesse", pausa: "Pausa", fechado: "Fechado", todos: "todos os serviços",
     pausaTodos: "(todos)", pausaDe: (nome) => `Pausa · ${nome}`, semPausa: "sem pausa", comFoto: "com foto",
+    cor: "Cor", fundo: "Fundo", detalhe: "Detalhe", detalhePadrao: "dourado padrão", perfil: "Quem atende",
+    avisos: "Avisos no WhatsApp", avisosDesligado: "não quero",
   },
   observacoes: { label: "Quer contar mais alguma coisa? (opcional)", placeholder: "ex.: atendo só com hora marcada aos sábados" },
   aceiteTeste: (dias) =>
-    `Entendi que o teste é grátis por ${dias} dias, sem cartão e sem cobrança automática. No fim, eu decido se quero continuar. O aviso por WhatsApp é um bônus e pode falhar; o lembrete oficial é pelo Telegram.`,
+    `Entendi que o teste é grátis por ${dias} dias, sem cartão e sem cobrança automática. No fim, eu decido se quero continuar. Os avisos por WhatsApp são um bônus e podem falhar; a agenda oficial é o Google Agenda.`,
   aceiteLgpd: { antes: "Autorizo o uso dos meus dados para criar minha conta de teste e para entrarem em contato comigo, conforme a ", link: "política de privacidade", depois: "." },
   erroEnvio: "Não consegui enviar agora. Seus dados continuam salvos aqui: tente de novo ou me chame no WhatsApp.",
+  erroDuplicado: "Já existe um cadastro com este e-mail ou WhatsApp. Me chame no WhatsApp que eu te ajudo.",
   whatsappErro: "Chamar no WhatsApp",
 };
 
@@ -283,11 +340,55 @@ export const sucessoTextos = {
   titulo: (nome) => `Recebi seu cadastro${nome ? `, ${nome}` : ""}!`,
   protocolo: "Seu protocolo:",
   proximosTitulo: "O que acontece agora",
+  // Envio pelo e-mail (sem integração): eu monto a página à mão.
   proximos: (email, prazo) => [
     { titulo: "Eu confiro seus dados", texto: `Monto sua página em ${prazo}.` },
     { titulo: "Você aceita o convite do Google", texto: `Chega um e-mail do Google Agenda em ${email}. É só abrir e tocar em “Adicionar agenda”.` },
     { titulo: "Seu teste começa", texto: "Te mando o link da sua página pelo WhatsApp. A partir daí são 30 dias grátis." },
   ],
+  // Integração automática: a página é criada na hora.
+  pagina: {
+    titulo: "Sua página",
+    criando: "Estou criando sua página. Leva uns minutinhos…",
+    pronta: "Sua página está no ar!",
+    demorando: "Está demorando mais que o normal. Pode fechar esta tela: te aviso pelo WhatsApp quando ficar pronta.",
+    erro: "Tive um problema ao criar sua página. Já fui avisado e resolvo pra você — te chamo no WhatsApp.",
+    abrir: "Abrir minha página",
+  },
+  // Gmail: aceitar a agenda é o passo que mais gente esquece — vai em destaque.
+  conviteGmail: {
+    selo: "Passo obrigatório",
+    titulo: "Aceite sua agenda no Gmail",
+    texto: (email) => `Mandei um e-mail do Google Agenda para ${email}. Sem aceitar, os agendamentos NÃO aparecem no seu celular.`,
+    passos: [
+      "Abra o Gmail no celular",
+      "Abra o e-mail do Google Agenda com o nome do seu salão (se não achar, olhe em Promoções ou Spam)",
+      "Toque em “Adicionar esta agenda”",
+    ],
+    botao: "Abrir o Gmail",
+    link: "https://mail.google.com/mail/u/0/#search/calendar-notification%40google.com",
+  },
+  // iCloud: agenda por assinatura no Calendário do iPhone.
+  agendaIphone: {
+    selo: "Passo obrigatório",
+    titulo: "Ative a agenda no seu iPhone",
+    texto: "Assim cada agendamento aparece sozinho no Calendário do iPhone.",
+    passos: [
+      "Toque no botão abaixo (abra esta tela no iPhone)",
+      "Toque em “Assinar no Calendário do iPhone”",
+      "Confirme em “Assinar” e depois “Adicionar”",
+    ],
+    botao: "Ativar agenda no iPhone",
+    aguardando: "O botão aparece assim que sua página ficar pronta. O link também vai no WhatsApp quando você mandar o “oi” (passo abaixo).",
+    ignorarGoogle: "Pode ignorar o e-mail do Google Agenda que chegou no seu iCloud.",
+  },
+  proximosAuto: () => [
+    { titulo: "Ative os avisos no WhatsApp", texto: "Mande um “oi” para o número do SlotMe. Sem isso o WhatsApp não deixa eu te mandar os avisos de agendamento.", acao: "ativarAvisos" },
+    { titulo: "Teste sua página", texto: "Faça um agendamento de teste e veja ele aparecer na sua agenda. São 30 dias grátis a partir de hoje." },
+  ],
+  ativarAvisosBotao: "Mandar “oi” para o SlotMe",
+  ativarAvisosMensagem: (protocolo) => `Oi! Quero ativar os avisos do meu salão (${protocolo}).`,
+  fotosTitulo: "Fotos recebidas",
   whatsappBotao: "Falar comigo no WhatsApp",
   whatsappMensagem: (protocolo, negocio) => `Oi! Acabei de fazer o cadastro do teste grátis (${protocolo}) para ${negocio}.`,
   voltarSite: "Voltar para o site",
@@ -299,6 +400,7 @@ export const erros = {
   nomeCurto: "Digite o nome completo (pelo menos 2 letras).",
   whatsapp: "Digite um celular com DDD, ex.: (21) 98888-7777.",
   email: "Esse e-mail não parece válido.",
+  emailProvedor: "Use um e-mail do Gmail (@gmail.com) ou do iCloud (@icloud.com).",
   emailConfirma: "Os e-mails não são iguais.",
   origem: "Escolha uma opção.",
   especialidade: "Escolha a sua especialidade.",
@@ -314,4 +416,5 @@ export const erros = {
   pausaNenhuma: "Ninguém está com pausa marcada. Ligue para quem pausa ou desligue a pausa.",
   aceiteTeste: "Para continuar, confirme que entendeu como funciona o teste.",
   aceiteLgpd: "Para continuar, autorize o uso dos dados.",
+  cor: "Escolha uma cor válida.",
 };

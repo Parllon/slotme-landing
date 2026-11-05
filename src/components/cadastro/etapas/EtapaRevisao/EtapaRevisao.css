@@ -47,3 +47,12 @@
   display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: .5rem 1rem;
   font-weight: 700; font-size: .9rem; border-radius: 99px; background: #25d366; color: #fff;
 }
+
+.revisao__cor { display: inline-flex; align-items: center; gap: .4rem; font-variant-numeric: tabular-nums; }
+.revisao__cor span { width: 1rem; height: 1rem; border-radius: 99px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
+
+.revisao__obrigatorio {
+  display: flex; gap: .45rem; align-items: flex-start; margin: .6rem 0 0 !important; padding: .6rem .7rem;
+  border-radius: .5rem; background: #fff3cd; color: #6b4500; font-size: .88rem; font-weight: 600; line-height: 1.45;
+}
+.revisao__obrigatorio svg { flex-shrink: 0; margin-top: .15rem; }

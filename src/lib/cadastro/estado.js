@@ -4,6 +4,10 @@ import { gerarId } from "./formatos";
 
 export const VERSAO_ESTADO = 1;
 
+// Cor personalizada: mesmos padrões do wizard do painel (vinho, fundo claro;
+// destaque vazio = dourado padrão do motor).
+export const corPadrao = () => ({ primaria: "#5C2330", destaque: "", modo: "claro" });
+
 const diaPadrao = (aberto) => ({ aberto, abre: "09:00", fecha: "19:00" });
 
 export function estadoInicial() {
@@ -25,7 +29,12 @@ export function estadoInicial() {
       // profissional tem a sua (porPessoa[id]; "dono" é você).
       pausa: { ativa: false, inicio: "12:00", fim: "13:00", modo: "todos", porPessoa: {} },
     },
-    visual: { tema: "", plano: "nao_sei" },
+    // tema: "" = escolham por mim | "tema_1".."tema_8" | "custom" (usa `cor`)
+    // perfil: "" = automático pela especialidade
+    visual: { tema: "", plano: "nao_sei", cor: corPadrao(), perfil: "" },
+    // Avisos de agendamento no WhatsApp do dono (negocio.whatsapp_aviso no sistema).
+    // outro=false -> usa o "Seu WhatsApp" da etapa 1.
+    avisos: { ativo: true, outro: false, numero: "" },
     revisao: { observacoes: "", aceiteTeste: false, aceiteLgpd: false, botcheck: false },
   };
 }
@@ -71,6 +80,8 @@ export function reducer(estado, acao) {
     // Atualiza um campo de uma seção simples: { secao: "voce", campo: "nome", valor }
     case "campo":
       return { ...estado, [acao.secao]: { ...estado[acao.secao], [acao.campo]: acao.valor } };
+    case "corAlterar":
+      return { ...estado, visual: { ...estado.visual, cor: { ...estado.visual.cor, [acao.campo]: acao.valor } } };
 
     case "servicoAdicionar":
       return { ...estado, servicos: [...estado.servicos, novoServico(acao.dados)] };
