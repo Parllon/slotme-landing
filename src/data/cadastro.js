@@ -220,6 +220,7 @@ export const horariosTextos = {
   copiar: "Usar o horário de segunda em todos os dias abertos",
   pausa: {
     label: "Fazer uma pausa todo dia (ex.: almoço)",
+    dica: "A gente bloqueia esse horário na agenda de quem faz a pausa: ele some da página de agendamento só para essa pessoa.",
     inicio: "Início",
     fim: "Fim",
     modoLegenda: "A pausa é no mesmo horário para todos?",

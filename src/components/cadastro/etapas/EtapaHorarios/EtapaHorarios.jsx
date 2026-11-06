@@ -59,7 +59,7 @@ export function EtapaHorarios({ estado, dispatch, erros }) {
       )}
 
       <div className={`etapa-horarios__pausa ${erros.pausa && !individual ? "etapa-horarios__dia--erro" : ""}`}>
-        <Alternador id="pausa" label={T.pausa.label} checked={pausa.ativa} onChange={(valor) => dispatch({ tipo: "pausaAlterar", campo: "ativa", valor })} compacto />
+        <Alternador id="pausa" label={T.pausa.label} hint={T.pausa.dica} checked={pausa.ativa} onChange={(valor) => dispatch({ tipo: "pausaAlterar", campo: "ativa", valor })} compacto />
 
         {pausa.ativa && pessoas.length > 1 && (
           <Opcoes
